@@ -1,3 +1,14 @@
+# Docker start
+
+We can build our Dockerfile to an image using, run this command inside the react directory.
+This will build our image and name it react-docker and tag it latest.
+### `docker build -t react-docker:latest .`
+
+Let's run our image now
+### `docker run -d -p 3000:80 react-docker`
+
+This will run our container on port 3000 and you can access it on localhost:3000,   -d stands for de-attached mode and -p stands for port and it maps to a port inside the container, here nginx works on port 80 so we map our local machine's port 3000 to port 80 inside container.
+
 # Getting Started with Create React App and Redux
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
