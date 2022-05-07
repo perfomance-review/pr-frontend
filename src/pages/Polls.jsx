@@ -43,7 +43,7 @@ const Polls = () => {
     ]
     return(
         <div>
-            <Title level={2}>Доступные опросы</Title>
+            <Title level={2} className="page-header">Доступные опросы</Title>
             <div style={{display: 'flex', flexWrap: 'wrap',}}>
                 {polls.map((poll,index) =>
                     <Link to={poll.id.toString()} key={poll.id}>
