@@ -8,16 +8,37 @@ import { Select, Button } from 'antd';
 const { Title } = Typography;
 const { Option } = Select;
 
-const children = [<Option key="1">Иванов Иван Иванович</Option>,
-<Option key="2">Петров Петр Петрович</Option>,
-<Option key="3">Николаев Николай Николаевич</Option>,
-<Option key="4">Александров Александр Александрович</Option>,
-<Option key="5">Васечкин Василий Васильевич</Option>,
-<Option key="6">Жуков Анатолий Анатольевич</Option>,
-<Option key="7">Собакевич Антон Антонович</Option>,];
+const users = [
+    {id: 0, name: "Иванов Иван Иванович"},
+    {id: 1, name: "Петров Петр Петрович"},
+    {id: 2, name: "Николаев Николай Николаевич"},
+    {id: 3, name: "Александров Александр Александрович"},
+    {id: 4, name: "Васечкин Василий Васильевич"},
+    {id: 5, name: "Жуков Анатолий Анатольевич"},
+    {id: 6, name: "Собакевич Антон Антонович"}
+];
+
+let selectedUsers = []
+
+function defineSelectedUsers(users){
+    selectedUsers = []
+    for (let user of users) {
+        selectedUsers.push(user.id);
+    }
+    console.log(selectedUsers)
+}
+defineSelectedUsers(users)
+
+function redefineSelectedUsers(list){
+    selectedUsers = []
+    for (let user of list) {
+        selectedUsers.push(Number(user));
+    }
+    console.log(selectedUsers)
+}
 
 function handleChange(value) {
-  console.log(`Selected: ${value}`);
+    redefineSelectedUsers(value)
 }
 
 const Poll = () => {
@@ -29,7 +50,6 @@ const Poll = () => {
             title: 'Poll' + useParams().id, 
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
         }
-
     return(
         <div>
             <Title level={2} className="page-header">Опрос "{poll.title}"</Title>
@@ -40,12 +60,16 @@ const Poll = () => {
             <Select
                 mode="multiple"
                 size='large'
-                placeholder="ВЫберите коллег"
-                defaultValue={[<Option key="1">Иванов Иван Иванович</Option>]}
+                placeholder="Выберите коллег"
+                defaultValue={users.map((user,index) =>
+                    <Option key={user.id}>{user.name}</Option>
+                )}
                 onChange={handleChange}
-                style={{ width: '100%' }}
+                className="user-picker"
             >
-                {children}
+                {users.map((user,index) =>
+                    <Option key={user.id}>{user.name}</Option>
+                )}
             </Select>
 
             <Button type="primary" shape="round" size='large' className='start-button'>

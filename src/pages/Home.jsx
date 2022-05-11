@@ -1,47 +1,89 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import logo from '../logoGray.png';
-import { Typography } from 'antd';
+import { Typography, Form, Input, Button, Checkbox } from 'antd';
 const { Title } = Typography;
 
 
 const Home = () => {
-    const polls = [
-        {
-            id: 0,
-            deadline: '03.05.2022', 
-            quantity: 8,
-            title: 'Poll0', 
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
-        },
-        {
-            id: 1,
-            deadline: '03.05.2022', 
-            quantity: 7,
-            title: 'Poll1', 
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
-        },
-        {
-            id: 2,
-            deadline: '03.05.2022', 
-            quantity: 6,
-            title: 'Poll2', 
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
-        },
-        {
-            id: 3,
-            deadline: '03.05.2022', 
-            quantity: 5,
-            title: 'Poll3', 
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
-        }
-    ]
+    const onFinish = (values) => {
+      console.log('Success:', values);
+    };
+  
+    const onFinishFailed = (errorInfo) => {
+      console.log('Failed:', errorInfo);
+    };
     return(
-        <div className="App">
-            <header className="App-header">
+        <div className='main-page-wrap'>
+            <div className='main-page-left'>
                 <Title>Performance review</Title>
-                <img src={logo} className="App-logo" alt="logo" style={{width: '30%', marginBottom: '10px'}} />
-            </header>
+                <img src={logo} className="app-logo" alt="logo" />
+            </div>
+            {/*<div>
+              <Form
+                name="basic"
+                labelCol={{
+                  span: 8,
+                }}
+                wrapperCol={{
+                  span: 16,
+                }}
+                initialValues={{
+                  remember: true,
+                }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+              >
+                <Form.Item
+                  label="Username"
+                  name="username"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your username!',
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+
+                <Form.Item
+                  label="Password"
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your password!',
+                    },
+                  ]}
+                >
+                  <Input.Password />
+                </Form.Item>
+
+                <Form.Item
+                  name="remember"
+                  valuePropName="checked"
+                  wrapperCol={{
+                    offset: 8,
+                    span: 16,
+                  }}
+                >
+                  <Checkbox>Remember me</Checkbox>
+                </Form.Item>
+
+                <Form.Item
+                  wrapperCol={{
+                    offset: 8,
+                    span: 16,
+                  }}
+                >
+                  <Button type="primary" htmlType="submit">
+                    Submit
+                  </Button>
+                </Form.Item>
+              </Form>
+            </div>*/}
         </div>
     )
 }

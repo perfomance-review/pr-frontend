@@ -1,5 +1,25 @@
-.App {
-  text-align: center;
+.app-logo{
+  width: 30%;
+  margin-bottom: 10px;
+}
+
+.sider{
+  overflow: auto;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.site-layout{
+  margin-left: 200px;
+  background: white;
+}
+
+.site-content{
+  margin: 50px;
+  overflow: initial;
 }
 
 .logo {
@@ -21,46 +41,48 @@
   pointer-events: none;
 }
 
-.App-header {
-  min-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-}
-
-.App-link {
-  color: rgb(112, 76, 182);
-}
-
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-.site-layout .site-layout-background {
-  background: #fff;
-}
-  [data-theme="dark"] .site-layout .site-layout-background {
-    background: #141414;
-  }
-
 .page-header{
   text-align: center;
+}
+
+.polls-wrapper{
+  display: flex; 
+  flex-wrap: wrap;
+}
+
+.poll-card{
+  width: 240px; 
+  margin: 10px;
 }
 
 .poll-description{
   font-size: 16px;
 }
 
+.poll-card-details{
+  display: flex; 
+  margin-top: 10px; 
+  justify-content: space-between;
+}
+
+.poll-card-detail-icon{
+  margin-right: 5px;
+}
+
 .start-button{
   margin-top: 20px;
   padding: 0 30px;
+}
+
+.main-page-wrap{
+  display: flex;
+}
+
+.main-page-left{
+  text-align: center;
+  width: 100%;
+}
+
+.user-picker{
+  width: 100%;
 }

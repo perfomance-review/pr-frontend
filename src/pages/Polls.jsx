@@ -8,58 +8,58 @@ import {
 } from '@ant-design/icons';
 const { Meta } = Card;
 const { Title } = Typography;
+const polls = [
+    {
+        id: 0,
+        deadline: '03.05.2022', 
+        quantity: 8,
+        title: 'Poll0', 
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
+    },
+    {
+        id: 1,
+        deadline: '03.05.2022', 
+        quantity: 7,
+        title: 'Poll1', 
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
+    },
+    {
+        id: 2,
+        deadline: '03.05.2022', 
+        quantity: 6,
+        title: 'Poll2', 
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
+    },
+    {
+        id: 3,
+        deadline: '03.05.2022', 
+        quantity: 5,
+        title: 'Poll3', 
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
+    }
+]
 
 
 const Polls = () => {
-    const polls = [
-        {
-            id: 0,
-            deadline: '03.05.2022', 
-            quantity: 8,
-            title: 'Poll0', 
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
-        },
-        {
-            id: 1,
-            deadline: '03.05.2022', 
-            quantity: 7,
-            title: 'Poll1', 
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
-        },
-        {
-            id: 2,
-            deadline: '03.05.2022', 
-            quantity: 6,
-            title: 'Poll2', 
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
-        },
-        {
-            id: 3,
-            deadline: '03.05.2022', 
-            quantity: 5,
-            title: 'Poll3', 
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
-        }
-    ]
     return(
         <div>
             <Title level={2} className="page-header">Доступные опросы</Title>
-            <div style={{display: 'flex', flexWrap: 'wrap',}}>
+            <div className="polls-wrapper">
                 {polls.map((poll,index) =>
                     <Link to={poll.id.toString()} key={poll.id}>
                         <Card
                             hoverable
-                            style={{ width: 240, margin: '10px' }}
+                            className="poll-card"
                             title={poll.title}
                         >
                             <Meta description={poll.description} ></Meta>
-                            <div style={{display: 'flex', marginTop: '10px', justifyContent: 'space-between',}}>
+                            <div className="poll-card-details">
                                 <div>
-                                    <QuestionCircleOutlined style={{marginRight: '5px'}}/>
+                                    <QuestionCircleOutlined className="poll-card-detail-icon" />
                                     {poll.quantity}
                                 </div>
                                 <div>
-                                    <FieldTimeOutlined style={{marginRight: '5px'}} />
+                                    <FieldTimeOutlined className="poll-card-detail-icon" />
                                     {poll.deadline}
                                 </div>
                             </div>
