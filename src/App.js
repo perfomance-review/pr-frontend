@@ -1,57 +1,53 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import { Routes, Route, Link } from 'react-router-dom';
+import { Home } from './pages/Home'
+import { Polls } from './pages/Polls'
+import { Poll } from './pages/Poll'
+import { P404 } from './pages/P404'
 import './App.css';
+import logo from './logo.png';
+import 'antd/dist/antd.css';
+import './index.css';
+import { Layout, Menu } from 'antd';
+const { Content, Sider } = Layout;
+const menuPoints = [
+  {
+    title: "Home",
+    to: "/"
+  },
+  {
+    title: "Polls",
+    to: "/polls"
+  },
+]
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Layout hasSider>
+        <Sider className="sider">
+            <div className="logo">
+                <img src={logo} className="logo-img" alt="logo" />
+                <p className='logo-text'>Performance<br/>review</p>
+            </div>
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
+              {menuPoints.map((point,index) =>
+                <Menu.Item key={index}>
+                  <Link to={point.to}>{point.title}</Link>
+                </Menu.Item>
+              )}
+            </Menu>
+        </Sider>
+        <Layout className="site-layout">
+          <Content className="site-content">
+            <Routes>
+              <Route path='/' element={<Home/>}></Route>
+              <Route path='/polls' element={<Polls/>}></Route>
+              <Route path='/polls/:id' element={<Poll/>}></Route>
+              <Route path='*' element={<P404/>}></Route>
+            </Routes>
+          </Content>
+        </Layout>
+    </Layout>
   );
 }
 
