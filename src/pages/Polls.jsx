@@ -13,30 +13,44 @@ const polls = [
         id: 0,
         deadline: '03.05.2022', 
         quantity: 8,
-        title: 'Poll0', 
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
+        title: 'Оценка достижений', 
+        description: 'Оцениваются персональные достижения коллег, согласно ранее установленным KPI.' 
     },
     {
         id: 1,
-        deadline: '03.05.2022', 
+        deadline: '04.05.2022', 
         quantity: 7,
-        title: 'Poll1', 
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
+        title: 'Итоги спринта', 
+        description: 'Плановая оценка работы Agile-команды по итогам завершенного спринта.' 
     },
     {
         id: 2,
-        deadline: '03.05.2022', 
-        quantity: 6,
-        title: 'Poll2', 
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
+        deadline: '06.05.2022', 
+        quantity: 5,
+        title: 'Персональный запрос мнения', 
+        description: 'У вас запрошено персональное мнение по «микроклимату» в команде.' 
     },
     {
         id: 3,
-        deadline: '03.05.2022', 
-        quantity: 5,
-        title: 'Poll3', 
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
-    }
+        deadline: '08.05.2022', 
+        quantity: 3,
+        title: 'По результатам испытательного срока', 
+        description: 'У вас запрошено мнение о результатах прохождения кандидатами испытательного срока.' 
+    },
+    {
+        id: 4,
+        deadline: '05.05.2022', 
+        quantity: 6,
+        title: 'Квартальная оценка', 
+        description: 'Performance review по итогам квартала.' 
+    },
+    {
+        id: 5,
+        deadline: '07.05.2022', 
+        quantity: 4,
+        title: 'Оценка вовлеченности', 
+        description: 'Оценка состояния вовлеченности по отделу.' 
+    },
 ]
 
 

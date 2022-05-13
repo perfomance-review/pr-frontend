@@ -12,11 +12,11 @@ import { Layout, Menu } from 'antd';
 const { Content, Sider } = Layout;
 const menuPoints = [
   {
-    title: "Home",
+    title: "Главная",
     to: "/"
   },
   {
-    title: "Polls",
+    title: "Опросы",
     to: "/polls"
   },
 ]
