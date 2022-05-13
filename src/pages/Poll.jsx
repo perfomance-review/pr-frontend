@@ -4,18 +4,17 @@ import { Typography } from 'antd';
 import 'antd/dist/antd.css';
 import { Select, Button } from 'antd';
 
-
 const { Title } = Typography;
 const { Option } = Select;
 
 const users = [
-    {id: 0, name: "Иванов Иван Иванович"},
-    {id: 1, name: "Петров Петр Петрович"},
-    {id: 2, name: "Николаев Николай Николаевич"},
-    {id: 3, name: "Александров Александр Александрович"},
-    {id: 4, name: "Васечкин Василий Васильевич"},
-    {id: 5, name: "Жуков Анатолий Анатольевич"},
-    {id: 6, name: "Собакевич Антон Антонович"}
+    {id: 0, name: "Аксёнов Илларион Эдуардович"},
+    {id: 1, name: "Блинов Давид Антонович"},
+    {id: 2, name: "Гаврилова Жанна Николаевна"},
+    {id: 3, name: "Фокина Ивона Игоревна"},
+    {id: 4, name: "Воронцова Патрисия Гавриловна"},
+    {id: 6, name: "Одинцов Матвей Павлович"},
+    {id: 5, name: "Жуков Анатолий Анатольевич"}
 ];
 
 let selectedUsers = []
@@ -41,14 +40,59 @@ function handleChange(value) {
     redefineSelectedUsers(value)
 }
 
+const polls = [
+    {
+        id: 0,
+        deadline: '03.05.2022', 
+        quantity: 8,
+        title: 'Оценка достижений', 
+        description: 'Оцениваются персональные достижения коллег, согласно ранее установленным KPI.' 
+    },
+    {
+        id: 1,
+        deadline: '04.05.2022', 
+        quantity: 7,
+        title: 'Итоги спринта', 
+        description: 'Плановая оценка работы Agile-команды по итогам завершенного спринта.' 
+    },
+    {
+        id: 2,
+        deadline: '06.05.2022', 
+        quantity: 5,
+        title: 'Персональный запрос мнения', 
+        description: 'У вас запрошено персональное мнение по «микроклимату» в команде.' 
+    },
+    {
+        id: 3,
+        deadline: '08.05.2022', 
+        quantity: 3,
+        title: 'По результатам испытательного срока', 
+        description: 'У вас запрошено мнение о результатах прохождения кандидатами испытательного срока.' 
+    },
+    {
+        id: 4,
+        deadline: '05.05.2022', 
+        quantity: 6,
+        title: 'Квартальная оценка', 
+        description: 'Performance review по итогам квартала.' 
+    },
+    {
+        id: 5,
+        deadline: '07.05.2022', 
+        quantity: 4,
+        title: 'Оценка вовлеченности', 
+        description: 'Оценка состояния вовлеченности по отделу.' 
+    },
+]
+
 const Poll = () => {
     const poll = 
         {
             id: useParams().id,
-            deadline: '03.05.2022', 
-            quantity: 8,
-            title: 'Poll' + useParams().id, 
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' 
+            deadline: polls[useParams().id].deadline, 
+            quantity: polls[useParams().id].quantity, 
+            title: polls[useParams().id].title, 
+            description: polls[useParams().id].description 
         }
     return(
         <div>
