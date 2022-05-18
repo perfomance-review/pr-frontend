@@ -24,7 +24,6 @@ function defineSelectedUsers(users){
     for (let user of users) {
         selectedUsers.push(user.id);
     }
-    console.log(selectedUsers)
 }
 defineSelectedUsers(users)
 
@@ -33,7 +32,6 @@ function redefineSelectedUsers(list){
     for (let user of list) {
         selectedUsers.push(Number(user));
     }
-    console.log(selectedUsers)
 }
 
 function handleChange(value) {
