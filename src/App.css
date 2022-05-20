@@ -45,6 +45,11 @@
   text-align: center;
 }
 
+.data-loader{
+  display: block;
+  text-align: center;
+}
+
 .polls-wrapper{
   display: flex; 
   flex-wrap: wrap;

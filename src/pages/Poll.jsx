@@ -40,57 +40,22 @@ function handleChange(value) {
 
 const polls = [
     {
-        id: 0,
-        deadline: '03.05.2022', 
-        quantity: 8,
-        title: 'Оценка достижений', 
-        description: 'Оцениваются персональные достижения коллег, согласно ранее установленным KPI.' 
-    },
-    {
-        id: 1,
-        deadline: '04.05.2022', 
-        quantity: 7,
-        title: 'Итоги спринта', 
-        description: 'Плановая оценка работы Agile-команды по итогам завершенного спринта.' 
-    },
-    {
-        id: 2,
-        deadline: '06.05.2022', 
-        quantity: 5,
-        title: 'Персональный запрос мнения', 
-        description: 'У вас запрошено персональное мнение по «микроклимату» в команде.' 
-    },
-    {
-        id: 3,
-        deadline: '08.05.2022', 
-        quantity: 3,
-        title: 'По результатам испытательного срока', 
-        description: 'У вас запрошено мнение о результатах прохождения кандидатами испытательного срока.' 
-    },
-    {
-        id: 4,
-        deadline: '05.05.2022', 
-        quantity: 6,
-        title: 'Квартальная оценка', 
-        description: 'Performance review по итогам квартала.' 
-    },
-    {
-        id: 5,
-        deadline: '07.05.2022', 
-        quantity: 4,
-        title: 'Оценка вовлеченности', 
-        description: 'Оценка состояния вовлеченности по отделу.' 
-    },
-]
+        "pollId":"ec5a122e-b741-415d-96c0-698119582a2c",
+        "title":"poll #2",
+        "deadline":"2022-05-28",
+        "questionsCount":6,
+        "respondentsCount":5,
+        "status":"OPEN"
+    },{"pollId":"a985119f-8866-4904-bc06-29ff5a7a4c4a","title":"poll #3","deadline":"2022-05-29","questionsCount":5,"respondentsCount":5,"status":"OPEN"},{"pollId":"44e5b51e-33c4-45c3-9740-02beb76cdac3","title":"poll #1","deadline":"2022-05-26","questionsCount":5,"respondentsCount":5,"status":"OPEN"}]
 
 const Poll = () => {
     const poll = 
         {
             id: useParams().id,
-            deadline: polls[useParams().id].deadline, 
-            quantity: polls[useParams().id].quantity, 
-            title: polls[useParams().id].title, 
-            description: polls[useParams().id].description 
+            deadline: polls[1].deadline, 
+            quantity: polls[1].questionsCount, 
+            title: polls[1].title, 
+            description: polls[1].description 
         }
     return(
         <div>
