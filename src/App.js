@@ -1,6 +1,5 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import { Home } from './pages/Home';
+import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { Polls } from './pages/Polls';
 import { Poll } from './pages/Poll';
 import { P404 } from './pages/P404';
@@ -11,10 +10,6 @@ import './index.css';
 import { Layout, Menu } from 'antd';
 const { Content, Sider } = Layout;
 const menuPoints = [
-  {
-    title: 'Главная',
-    to: '/',
-  },
   {
     title: 'Опросы',
     to: '/polls',
@@ -44,7 +39,7 @@ function App() {
       <Layout className="site-layout">
         <Content className="site-content">
           <Routes>
-            <Route path="/" element={<Home />}></Route>
+            <Route path="/" element={<Navigate to="/polls" replace />}></Route>
             <Route path="/polls" element={<Polls />}></Route>
             <Route path="/polls/:id" element={<Poll />}></Route>
             <Route path="*" element={<P404 />}></Route>

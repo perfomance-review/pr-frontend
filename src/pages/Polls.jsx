@@ -35,7 +35,7 @@ const Polls = () => {
           </Title>
           <div className="polls-wrapper">
             {polls.map((poll, index) => (
-              <Link to={poll.pollId} key={poll.pollId}>
+              <Link to={`/polls/${poll.pollId}`} key={poll.pollId}>
                 <Card hoverable className="poll-card" title={poll.title}>
                   <Meta description={poll.respondentsCount}></Meta>
                   <div className="poll-card-details">

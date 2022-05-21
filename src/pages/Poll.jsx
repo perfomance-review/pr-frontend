@@ -90,20 +90,16 @@ const Poll = () => {
       <p className="poll-description">
         <b>Оцениваемые коллеги</b>
       </p>
+
       <Select
         mode="multiple"
         size="large"
         placeholder="Выберите коллег"
-        defaultValue={users.map((user, index) => (
-          <Option key={user.id}>{user.name}</Option>
-        ))}
+        options={users.map(({ id, name }) => ({ label: name, value: id }))}
+        defaultValue={selectedUsers}
         onChange={handleChange}
         className="user-picker"
-      >
-        {users.map((user, index) => (
-          <Option key={user.id}>{user.name}</Option>
-        ))}
-      </Select>
+      />
 
       <Button type="primary" shape="round" size="large" className="start-button">
         Начать
