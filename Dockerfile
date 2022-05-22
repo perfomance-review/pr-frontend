@@ -20,6 +20,10 @@ RUN npm run build
 #get the latest alpine image from nginx registry
 FROM nginx:alpine
 
+COPY ./default.conf /etc/nginx/conf.d/
+
 #we copy the output from first stage that is our react build
 #into nginx html directory where it will serve our index file
 COPY --from=build-stage /app/build/ /usr/share/nginx/html
+
+CMD nginx -g "daemon off;"
