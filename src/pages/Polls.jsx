@@ -9,16 +9,16 @@ const { Title } = Typography;
 
 function countPollTime(questionsCount, respondentsCount) {
   let d = questionsCount * ((respondentsCount * (respondentsCount - 1)) / 2) * 5;
-  var h = Math.floor(d / 3600);
-  var m = Math.floor((d % 3600) / 60);
-  var s = Math.floor((d % 3600) % 60);
+  let h = Math.floor(d / 3600);
+  let m = Math.floor((d % 3600) / 60);
+  let s = Math.floor((d % 3600) % 60);
 
   if (s > 0) {
     m = m + 1;
   }
 
-  var hDisplay = h > 0 ? h + (h % 10 == 1 ? ' час ' : h % 10 < 5 ? ' часa ' : ' часов ') : '';
-  var mDisplay = m > 0 ? m + (m % 10 == 1 ? ' минута ' : m % 10 < 5 ? ' минуты ' : ' минут ') : '';
+  let hDisplay = h > 0 ? h + (h % 10 == 1 ? ' час ' : h % 10 < 5 ? ' часa ' : ' часов ') : '';
+  let mDisplay = m > 0 ? m + (m % 10 == 1 ? ' минута ' : m % 10 < 5 ? ' минуты ' : ' минут ') : '';
 
   return hDisplay + mDisplay;
 }
