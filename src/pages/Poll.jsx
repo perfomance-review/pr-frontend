@@ -52,22 +52,10 @@ const Poll = () => {
     title: polls[1].title,
     description: polls[1].description,
   };
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState(users.map((user) => user.id));
 
   function handleChange(value) {
     setSelectedUsers(value);
-  }
-
-  useEffect(() => {
-    getStartSelectedUsers();
-  }, []);
-
-  function getStartSelectedUsers() {
-    const response = [];
-    for (let user of users) {
-      response.push(user.id);
-    }
-    setSelectedUsers(response);
   }
 
   return (

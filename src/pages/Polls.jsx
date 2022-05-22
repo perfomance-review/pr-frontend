@@ -8,15 +8,19 @@ const { Meta } = Card;
 const { Title } = Typography;
 
 function countPollTime(questionsCount, respondentsCount) {
-  let d = questionsCount * ((respondentsCount * (respondentsCount-1)/2))*5;
+  let d = questionsCount * ((respondentsCount * (respondentsCount - 1)) / 2) * 5;
   var h = Math.floor(d / 3600);
-  var m = Math.floor(d % 3600 / 60);
-  var s = Math.floor(d % 3600 % 60);
+  var m = Math.floor((d % 3600) / 60);
+  var s = Math.floor((d % 3600) % 60);
 
-  var hDisplay = h > 0 ? h + ((h%10) == 1 ? " час " : ((h%10) < 5 ? " часa " : " часов ")) : "";
-  var mDisplay = m > 0 ? m + ((m%10) == 1 ? " минута " : ((m%10) < 5 ? " минуты " : " минут ")) : "";
-  var sDisplay = s > 0 ? s + ((s%10) == 1 ? " секунда" : ((s%10) < 5 ? " секунды " : " секунд ")) : "";
-  return hDisplay + mDisplay + sDisplay;
+  if (s > 0) {
+    m = m + 1;
+  }
+
+  var hDisplay = h > 0 ? h + (h % 10 == 1 ? ' час ' : h % 10 < 5 ? ' часa ' : ' часов ') : '';
+  var mDisplay = m > 0 ? m + (m % 10 == 1 ? ' минута ' : m % 10 < 5 ? ' минуты ' : ' минут ') : '';
+
+  return hDisplay + mDisplay;
 }
 
 const Polls = () => {
@@ -49,7 +53,10 @@ const Polls = () => {
             {polls.map((poll, index) => (
               <Link to={`/polls/${poll.pollId}`} key={poll.pollId}>
                 <Card hoverable className="poll-card" title={poll.title}>
-                  <p>Опрос займёт приблизительно {countPollTime(poll.questionsCount, poll.respondentsCount)}</p>
+                  <p>
+                    Опрос займёт приблизительно{' '}
+                    {countPollTime(poll.questionsCount, poll.respondentsCount)}
+                  </p>
                   <div className="poll-card-details">
                     <div>
                       <QuestionCircleOutlined className="poll-card-detail-icon" />
