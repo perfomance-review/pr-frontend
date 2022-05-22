@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography } from 'antd';
 import 'antd/dist/antd.css';
@@ -16,27 +16,6 @@ const users = [
   { id: 6, name: 'Одинцов Матвей Павлович' },
   { id: 5, name: 'Жуков Анатолий Анатольевич' },
 ];
-
-let selectedUsers = [];
-
-function defineSelectedUsers(users) {
-  selectedUsers = [];
-  for (let user of users) {
-    selectedUsers.push(user.id);
-  }
-}
-defineSelectedUsers(users);
-
-function redefineSelectedUsers(list) {
-  selectedUsers = [];
-  for (let user of list) {
-    selectedUsers.push(Number(user));
-  }
-}
-
-function handleChange(value) {
-  redefineSelectedUsers(value);
-}
 
 const polls = [
   {
@@ -73,6 +52,24 @@ const Poll = () => {
     title: polls[1].title,
     description: polls[1].description,
   };
+  const [selectedUsers, setSelectedUsers] = useState([]);
+
+  function handleChange(value) {
+    setSelectedUsers(value);
+  }
+
+  useEffect(() => {
+    getStartSelectedUsers();
+  }, []);
+
+  function getStartSelectedUsers() {
+    const response = [];
+    for (let user of users) {
+      response.push(user.id);
+    }
+    setSelectedUsers(response);
+  }
+
   return (
     <div>
       <Title level={2} className="page-header">
@@ -96,7 +93,7 @@ const Poll = () => {
         size="large"
         placeholder="Выберите коллег"
         options={users.map(({ id, name }) => ({ label: name, value: id }))}
-        defaultValue={selectedUsers}
+        value={selectedUsers}
         onChange={handleChange}
         className="user-picker"
       />
