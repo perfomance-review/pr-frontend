@@ -2,6 +2,8 @@ import React from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { Polls } from './pages/Polls';
 import { Poll } from './pages/Poll';
+import { PollTake } from './pages/PollTake';
+import { PollResult } from './pages/PollResult';
 import { P404 } from './pages/P404';
 import './App.css';
 import logo from './logo.png';
@@ -41,6 +43,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/polls" replace />}></Route>
             <Route path="/polls" element={<Polls />}></Route>
+            <Route path="/pollTake" element={<PollTake />}></Route>
+            <Route path="/pollResult" element={<PollResult />}></Route>
             <Route path="/polls/:id" element={<Poll />}></Route>
             <Route path="*" element={<P404 />}></Route>
           </Routes>
