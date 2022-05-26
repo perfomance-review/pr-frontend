@@ -91,3 +91,45 @@
 .user-picker {
   width: 100%;
 }
+
+.question-page-wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.question {
+  background: #edeef0;
+  padding: 25px 40px;
+  margin: 70px 0 30px;
+  text-align: center;
+  border: 1px solid #e7e8ec;
+  border-radius: 10px;
+}
+
+.answers-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.answer {
+  background: #edeef0;
+  border: 1px solid #e7e8ec;
+  border-radius: 10px;
+  padding: 45px 40px;
+  text-align: center;
+  width: 47%;
+}
+
+.answer-user {
+  width: 100%;
+  max-width: 210px;
+  display: block;
+  margin: 0 auto;
+}
+
+.question-result-img {
+  margin: 0 auto;
+  display: block;
+  width: 80%;
+  max-width: 300px;
+}
