@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import result from '../result.png';
 import { Typography } from 'antd';
 import 'antd/dist/antd.css';
 import { Select, Button } from 'antd';
@@ -22,7 +23,7 @@ const PollResult = () => {
             Спасибо, что нашли время и ответили на наши вопросы. Ваше мнение очень важно для нас. Мы используем ваши ответы для того, чтобы сделать совместную работу ещё лучше.
           </p>
         </div>
-        <img src={process.env.PUBLIC_URL + '/result.png'} className='question-result-img' />
+        <img src={result} className='question-result-img' />
       </div>
     </div>
   );
