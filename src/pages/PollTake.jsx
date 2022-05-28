@@ -33,8 +33,6 @@ const PollTake = () => {
           </div>
         </div>
       </div>
-      
-
     </div>
   );
 };

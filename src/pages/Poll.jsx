@@ -1,94 +1,108 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Typography } from 'antd';
+import { Typography, Spin, Space } from 'antd';
 import 'antd/dist/antd.css';
 import { Select, Button } from 'antd';
+import PollService from '../API/PollService';
 
 const { Title } = Typography;
 const { Option } = Select;
 
-const users = [
-  { id: 0, name: 'Аксёнов Илларион Эдуардович' },
-  { id: 1, name: 'Блинов Давид Антонович' },
-  { id: 2, name: 'Гаврилова Жанна Николаевна' },
-  { id: 3, name: 'Фокина Ивона Игоревна' },
-  { id: 4, name: 'Воронцова Патрисия Гавриловна' },
-  { id: 6, name: 'Одинцов Матвей Павлович' },
-  { id: 5, name: 'Жуков Анатолий Анатольевич' },
-];
+function countPollTime(questionsCount, respondentsCount) {
+  let d = questionsCount * ((respondentsCount * (respondentsCount - 1)) / 2) * 5;
+  let h = Math.floor(d / 3600);
+  let m = Math.floor((d % 3600) / 60);
+  let s = Math.floor((d % 3600) % 60);
 
-const polls = [
-  {
-    pollId: 'ec5a122e-b741-415d-96c0-698119582a2c',
-    title: 'poll #2',
-    deadline: '2022-05-28',
-    questionsCount: 6,
-    respondentsCount: 5,
-    status: 'OPEN',
-  },
-  {
-    pollId: 'a985119f-8866-4904-bc06-29ff5a7a4c4a',
-    title: 'poll #3',
-    deadline: '2022-05-29',
-    questionsCount: 5,
-    respondentsCount: 5,
-    status: 'OPEN',
-  },
-  {
-    pollId: '44e5b51e-33c4-45c3-9740-02beb76cdac3',
-    title: 'poll #1',
-    deadline: '2022-05-26',
-    questionsCount: 5,
-    respondentsCount: 5,
-    status: 'OPEN',
-  },
-];
+  if (s > 0) {
+    m = m + 1;
+  }
+
+  let hDisplay = h > 0 ? h + (h % 10 == 1 ? ' час ' : h % 10 < 5 ? ' часa ' : ' часов ') : '';
+  let mDisplay = m > 0 ? m + (m % 10 == 1 ? ' минута ' : m % 10 < 5 ? ' минуты ' : ' минут ') : '';
+
+  return hDisplay + mDisplay;
+}
 
 const Poll = () => {
-  const poll = {
-    id: useParams().id,
-    deadline: polls[1].deadline,
-    quantity: polls[1].questionsCount,
-    title: polls[1].title,
-    description: polls[1].description,
-  };
-  const [selectedUsers, setSelectedUsers] = useState(users.map((user) => user.id));
+  const [poll, setPoll] = useState({title:"",questionsCount:0,deadline:"",respondents:[],users:[],respondentsCount:0});
+  const [isPollsLoading, setIsPollsLoading] = useState(false);
+  const pollId = useParams().id;
+  
+  const [selectedUsers, setSelectedUsers] = useState([]);
+
+  useEffect(() => {
+    getPoll();
+  }, []);
+
+  async function getPoll() {
+    setIsPollsLoading(true);
+    const response = await PollService.getPoll(pollId);
+    setPoll(response);
+    setSelectedUsers(response.selectedUsers)
+    setIsPollsLoading(false);
+  }
 
   function handleChange(value) {
     setSelectedUsers(value);
   }
 
+  async function startPoll() {
+    setIsPollsLoading(true);
+    PollService.startPoll(pollId,selectedUsers)
+      .then(function (response) {})
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function(){
+        setIsPollsLoading(false);
+      });
+  }
+
   return (
     <div>
-      <Title level={2} className="page-header">
-        Опрос "{poll.title}"
-      </Title>
-      <p className="poll-description">
-        <b>Подробности:</b> {poll.description}
-      </p>
-      <p className="poll-description">
-        <b>Срок выполнения:</b> {poll.deadline}
-      </p>
-      <p className="poll-description">
-        <b>Количество вопросов:</b> {poll.quantity}
-      </p>
-      <p className="poll-description">
-        <b>Оцениваемые коллеги</b>
-      </p>
+      {isPollsLoading ? (
+        <Space className="data-loader">
+          <Spin size="large" />
+        </Space>
+      ) : (
+        <>
+          <Title level={2} className="page-header">
+            Опрос "{poll.title}"
+          </Title>
+          <p className="poll-description">
+            <b>Подробности:</b> Опрос займёт приблизительно {countPollTime(poll.questionsCount, poll.respondentsCount)}
+          </p>
+          <p className="poll-description">
+            <b>Срок выполнения:</b> {poll.deadline}
+          </p>
+          <p className="poll-description">
+            <b>Количество вопросов:</b> {poll.questionsCount}
+          </p>
+          <p className="poll-description">
+            <b>Оцениваемые коллеги</b>
+          </p>
 
-      <Select
-        mode="multiple"
-        size="large"
-        placeholder="Выберите коллег"
-        options={users.map(({ id, name }) => ({ label: name, value: id }))}
-        value={selectedUsers}
-        onChange={handleChange}
-        className="user-picker"
-      />
+          <Select
+            mode="multiple"
+            size="large"
+            placeholder="Выберите коллег"
+            options={poll.users.map(({ id, name }) => ({ label: name, value: id }))}
+            value={selectedUsers}
+            onChange={handleChange}
+            className="user-picker"
+          />
 
-      <Button type="primary" shape="round" size="large" className="start-button">
-        Начать
-      </Button>
+          <Button 
+              onClick={startPoll}
+              type="primary" 
+              shape="round" 
+              size="large" 
+              className="start-button">
+            Начать
+          </Button>
+        </>
+      )}
     </div>
   );
 };
