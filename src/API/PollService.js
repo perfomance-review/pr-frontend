@@ -39,9 +39,7 @@ export default class PostService {
   static async startPoll(pollId,user_id) {
     debugger
     try {
-      const response = await axios.post('/api/start/' + pollId, null, { params: {
-        user_id
-      }});
+      const response = await axios.post('/api/start/' + pollId, user_id);
       return response.data;
     } catch (e) {
       openNotification();
