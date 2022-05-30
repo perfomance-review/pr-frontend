@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, Spin, Space } from 'antd';
 import 'antd/dist/antd.css';
@@ -31,6 +31,10 @@ const Poll = () => {
   
   const [selectedUsers, setSelectedUsers] = useState([]);
 
+  const usersList = useMemo(() => {
+    return poll.users.map(({ id, name }) => ({ label: name, value: id }))
+  }, [poll]);
+
   useEffect(() => {
     getPoll();
   }, []);
@@ -38,8 +42,16 @@ const Poll = () => {
   async function getPoll() {
     setIsPollLoading(true);
     const response = await PollService.getPoll(pollId);
-    setPoll(response);
-    setSelectedUsers(response.selectedUsers)
+    const changedResponse = {
+      respondentsCount: response.respondents.length,
+      users: response.respondents.map(item => ({id: item.userId, name: item.secondName + " " + item.firstName})),
+      selectedUsers: response.respondents.map(item => (item.userId)),
+      title: response.title,
+      questionsCount: response.questionsCount,
+      deadline: response.deadline
+    }
+    setPoll(changedResponse);
+    setSelectedUsers(changedResponse.selectedUsers)
     setIsPollLoading(false);
   }
 
@@ -81,7 +93,7 @@ const Poll = () => {
             mode="multiple"
             size="large"
             placeholder="Выберите коллег"
-            options={poll.users.map(({ id, name }) => ({ label: name, value: id }))}
+            options={usersList}
             value={selectedUsers}
             onChange={handleChange}
             className="user-picker"
