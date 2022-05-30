@@ -26,7 +26,7 @@ function countPollTime(questionsCount, respondentsCount) {
 
 const Poll = () => {
   const [poll, setPoll] = useState({title:"",questionsCount:0,deadline:"",respondents:[],users:[],respondentsCount:0});
-  const [isPollsLoading, setIsPollsLoading] = useState(false);
+  const [isPollLoading, setIsPollLoading] = useState(false);
   const pollId = useParams().id;
   
   const [selectedUsers, setSelectedUsers] = useState([]);
@@ -36,11 +36,11 @@ const Poll = () => {
   }, []);
 
   async function getPoll() {
-    setIsPollsLoading(true);
+    setIsPollLoading(true);
     const response = await PollService.getPoll(pollId);
     setPoll(response);
     setSelectedUsers(response.selectedUsers)
-    setIsPollsLoading(false);
+    setIsPollLoading(false);
   }
 
   function handleChange(value) {
@@ -48,20 +48,14 @@ const Poll = () => {
   }
 
   async function startPoll() {
-    setIsPollsLoading(true);
-    PollService.startPoll(pollId,selectedUsers)
-      .then(function (response) {})
-      .catch(function (error) {
-        console.log(error);
-      })
-      .finally(function(){
-        setIsPollsLoading(false);
-      });
+    setIsPollLoading(true);
+    const response = await PollService.startPoll(pollId,selectedUsers);
+    setIsPollLoading(false);
   }
 
   return (
     <div>
-      {isPollsLoading ? (
+      {isPollLoading ? (
         <Space className="data-loader">
           <Spin size="large" />
         </Space>

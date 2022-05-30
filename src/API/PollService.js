@@ -19,25 +19,25 @@ export default class PostService {
   static async getPoll(id) {
     try {
       const response = await axios.get('/api/polls/' + id);
-      response.data.respondentsCount = response.data.respondents.length;
-      response.data.users = [];
-      response.data.selectedUsers = [];
-      response.data.respondents.forEach(function(item) {
+      let poll = response.data;
+      poll.respondentsCount = poll.respondents.length;
+      poll.users = [];
+      poll.selectedUsers = [];
+      poll.respondents.forEach(function(item) {
         let u = {
           id: item.userId,
           name: item.secondName + " " + item.firstName,
         }
-        response.data.users.push(u);
-        response.data.selectedUsers.push(u.id);
+        poll.users.push(u);
+        poll.selectedUsers.push(u.id);
       });
-      return response.data;
+      return poll;
     } catch (e) {
       openNotification();
       console.log(e);
     }
   }
   static async startPoll(pollId,user_id) {
-    debugger
     try {
       const response = await axios.post('/api/start/' + pollId, user_id);
       return response.data;
