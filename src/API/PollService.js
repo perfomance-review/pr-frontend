@@ -10,7 +10,7 @@ export default class PostService {
   static async getUserPolls() {
     try {
       const response = await axios.get('/api/polls');
-      return response.data;
+      return response.data.polls;
     } catch (e) {
       openNotification();
       console.log(e);
