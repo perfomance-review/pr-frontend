@@ -71,7 +71,7 @@ const Profile = () => {
         </div>
 
         <div className='profile-block'>
-          <Diagram></Diagram>
+          <Diagram/>
         </div>
       </div>
     </div>
