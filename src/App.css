@@ -206,8 +206,6 @@ input[type="range"]::-webkit-slider-thumb {
   bottom: 6px;
   background-color: white;
   cursor: -webkit-grab;
-
-  -webkit-transition: border 1000ms ease;
   transition: border 1000ms ease;
 }
 
@@ -222,7 +220,6 @@ input[type="range"]::-moz-range-thumb {
   bottom: 11px;
   background-color: #1d1c25;
   cursor: -moz-grab;
-  -moz-transition: border 1000ms ease;
   transition: border 1000ms ease;
 }
 

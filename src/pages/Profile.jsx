@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Typography } from 'antd';
 import 'antd/dist/antd.css';
 import { Select, Button } from 'antd';
-import ReactECharts from 'echarts-for-react';
+import { Diagram } from './Diagram';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -71,10 +71,7 @@ const Profile = () => {
         </div>
 
         <div className='profile-block'>
-          <ReactECharts
-            option={option}
-            style={{ height: 400 }}
-          />
+          <Diagram></Diagram>
         </div>
       </div>
     </div>
