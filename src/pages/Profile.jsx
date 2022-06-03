@@ -8,38 +8,6 @@ const { Title } = Typography;
 const { Option } = Select;
 
 const Profile = () => {
-
-  const option = {
-    title: {
-      text: ''
-    },
-    tooltip: {},
-    legend: {
-      data: ['Результаты оценки']
-    },
-    radar: {
-      // shape: 'circle',
-      indicator: [
-          { name: 'Автономность', max: 10},
-          { name: 'Лидерство', max: 10},
-          { name: 'Системность', max: 10},
-          { name: 'Коммуникация', max: 10},
-          { name: 'Планирование', max: 10}
-      ]
-    },
-    series: [{
-      name: 'Результаты оценки',
-      type: 'radar',
-      // areaStyle: {normal: {}},
-      data : [
-        {
-          value : [8, 4, 6, 8, 2],
-          name : 'Результаты оценки'
-        }
-      ]
-    }]
-  };
-
   return (
     <div>
       <Title level={2} className="page-header">
