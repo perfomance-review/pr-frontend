@@ -2,9 +2,6 @@ import React from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { Polls } from './pages/Polls';
 import { Poll } from './pages/Poll';
-import { PollTake } from './pages/PollTake';
-import { PollResult } from './pages/PollResult';
-import { Profile } from './pages/Profile';
 import { P404 } from './pages/P404';
 import './App.css';
 import logo from './logo.png';
@@ -16,18 +13,6 @@ const menuPoints = [
   {
     title: 'Опросы',
     to: '/polls',
-  },
-  {
-    title: 'Профиль',
-    to: '/profile',
-  },
-  {
-    title: 'На оценку',
-    to: '/polltake',
-  },
-  {
-    title: 'Результат оценки',
-    to: '/pollresult',
   },
 ];
 
@@ -57,9 +42,6 @@ function App() {
             <Route path="/" element={<Navigate to="/polls" replace />}></Route>
             <Route path="/polls" element={<Polls />}></Route>
             <Route path="/polls/:id" element={<Poll />}></Route>
-            <Route path="/pollTake" element={<PollTake />}></Route>
-            <Route path="/pollResult" element={<PollResult />}></Route>
-            <Route path="/profile" element={<Profile />}></Route>
             <Route path="*" element={<P404 />}></Route>
           </Routes>
         </Content>
