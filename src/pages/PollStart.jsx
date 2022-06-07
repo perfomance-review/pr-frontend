@@ -24,15 +24,22 @@ function countPollTime(questionsCount, respondentsCount) {
   return hDisplay + mDisplay;
 }
 
-const PollStart = ({updatePollStage}) => {
-  const [poll, setPoll] = useState({title:"",questionsCount:0,deadline:"",respondents:[],users:[],respondentsCount:0});
+const PollStart = ({ updatePollStage }) => {
+  const [poll, setPoll] = useState({
+    title: '',
+    questionsCount: 0,
+    deadline: '',
+    respondents: [],
+    users: [],
+    respondentsCount: 0,
+  });
   const [isPollLoading, setIsPollLoading] = useState(false);
   const pollId = useParams().id;
-  
+
   const [selectedUsers, setSelectedUsers] = useState([]);
 
   const usersList = useMemo(() => {
-    return poll.users.map(({ id, name }) => ({ label: name, value: id }))
+    return poll.users.map(({ id, name }) => ({ label: name, value: id }));
   }, [poll]);
 
   useEffect(() => {
@@ -44,15 +51,18 @@ const PollStart = ({updatePollStage}) => {
     const response = await PollService.getPoll(pollId);
     const changedResponse = {
       respondentsCount: response.respondents.length,
-      users: response.respondents.map(item => ({id: item.userId, name: item.secondName + " " + item.firstName})),
-      selectedUsers: response.respondents.map(item => (item.userId)),
+      users: response.respondents.map((item) => ({
+        id: item.userId,
+        name: item.secondName + ' ' + item.firstName,
+      })),
+      selectedUsers: response.respondents.map((item) => item.userId),
       title: response.title,
       questionsCount: response.questionsCount,
       deadline: response.deadline,
-      status: response.status
-    }
+      status: response.status,
+    };
     setPoll(changedResponse);
-    setSelectedUsers(changedResponse.selectedUsers)
+    setSelectedUsers(changedResponse.selectedUsers);
     setIsPollLoading(false);
   }
 
@@ -62,12 +72,12 @@ const PollStart = ({updatePollStage}) => {
 
   async function startPoll() {
     setIsPollLoading(true);
-    const response = await PollService.startPoll(pollId,selectedUsers);
+    const response = await PollService.startPoll(pollId, selectedUsers);
     updatePollStage(1);
     setIsPollLoading(false);
   }
 
-  function continuePoll (){
+  function continuePoll() {
     updatePollStage(1);
   }
 
@@ -83,7 +93,8 @@ const PollStart = ({updatePollStage}) => {
             Опрос "{poll.title}"
           </Title>
           <p className="poll-description">
-            <b>Подробности:</b> Опрос займёт приблизительно {countPollTime(poll.questionsCount, poll.respondentsCount)}
+            <b>Подробности:</b> Опрос займёт приблизительно{' '}
+            {countPollTime(poll.questionsCount, poll.respondentsCount)}
           </p>
           <p className="poll-description">
             <b>Срок выполнения:</b> {poll.deadline}
@@ -104,25 +115,27 @@ const PollStart = ({updatePollStage}) => {
             onChange={handleChange}
             className="user-picker"
           />
-            {poll.status == "OPEN" ? (
-                <Button 
-                    onClick={startPoll}
-                    type="primary" 
-                    shape="round" 
-                    size="large" 
-                    className="start-button">
-                Начать
-                </Button>
-            ) : (
-                <Button 
-                    onClick={continuePoll}
-                    type="primary" 
-                    shape="round" 
-                    size="large" 
-                    className="start-button">
-                    Продолжить
-                </Button>
-            )}
+          {poll.status == 'OPEN' ? (
+            <Button
+              onClick={startPoll}
+              type="primary"
+              shape="round"
+              size="large"
+              className="start-button"
+            >
+              Начать
+            </Button>
+          ) : (
+            <Button
+              onClick={continuePoll}
+              type="primary"
+              shape="round"
+              size="large"
+              className="start-button"
+            >
+              Продолжить
+            </Button>
+          )}
         </>
       )}
     </div>

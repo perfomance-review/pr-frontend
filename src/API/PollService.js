@@ -34,7 +34,7 @@ export default class PostService {
       console.log(e);
     }
   }
-  static async startPoll(pollId,user_id) {
+  static async startPoll(pollId, user_id) {
     try {
       const response = await axios.post('/api/start/' + pollId, user_id);
       return response.data;

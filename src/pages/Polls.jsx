@@ -53,9 +53,7 @@ const Polls = () => {
             {polls.map((poll, index) => (
               <Link to={`/polls/${poll.pollId}`} key={poll.pollId}>
                 <Card hoverable className="poll-card" title={poll.title}>
-                  <p>
-                    {poll.description}
-                  </p>
+                  <p>{poll.description}</p>
                   <p>
                     Опрос займёт приблизительно{' '}
                     {countPollTime(poll.questionsCount, poll.respondentsCount)}
