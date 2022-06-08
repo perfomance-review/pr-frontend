@@ -45,16 +45,18 @@ const PollTake = ({ updatePollStatus }) => {
       winnerId: winnerId,
       isCompleted: !question.hasNext,
     };
-    const response = await PollService.updateWinner(userAnswer);
-    if(response){
-      if (pairNumber + 1 < question.pairsOfPollInfo.length) {
-        setPairNumber(pairNumber + 1);
-      } else if (question.hasNext) {
-        getQuestion();
-        setPairNumber(0);
-      } else {
-        updatePollStatus('CLOSE');
-      }
+    try {
+      const response = await PollService.updateWinner(userAnswer);
+    } catch (e) {
+      return
+    }
+    if (pairNumber + 1 < question.pairsOfPollInfo.length) {
+      setPairNumber(pairNumber + 1);
+    } else if (question.hasNext) {
+      getQuestion();
+      setPairNumber(0);
+    } else {
+      updatePollStatus('CLOSE');
     }
     setIsPollLoading(false);
   }
