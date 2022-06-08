@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, Spin, Space } from 'antd';
 import 'antd/dist/antd.css';
@@ -24,49 +24,14 @@ function countPollTime(questionsCount, respondentsCount) {
   return hDisplay + mDisplay;
 }
 
-const PollStart = ({ updatePollStage }) => {
-  const [poll, setPoll] = useState({
-    title: '',
-    questionsCount: 0,
-    deadline: '',
-    users: [],
-    respondentsCount: 0,
-  });
+const PollStart = (props) => {
   const [isPollLoading, setIsPollLoading] = useState(false);
   const pollId = useParams().id;
-
-  const [selectedUsers, setSelectedUsers] = useState([]);
-
-  const usersList = useMemo(() => {
-    return poll.users.map(({ id, name }) => ({ label: name, value: id }));
-  }, [poll]);
+  const [selectedUsers, setSelectedUsers] = useState(props.poll.selectedUsers);
 
   useEffect(() => {
-    getPoll();
-  }, []);
-
-  async function getPoll() {
-    setIsPollLoading(true);
-    const response = await PollService.getPoll(pollId);
-    const changedResponse = {
-      respondentsCount: response.respondents.length,
-      users: response.respondents.map((item) => ({
-        id: item.userId,
-        name: item.secondName + ' ' + item.firstName,
-      })),
-      selectedUsers: response.respondents.map((item) => item.userId),
-      title: response.title,
-      questionsCount: response.questionsCount,
-      deadline: response.deadline,
-      status: response.status,
-    };
-    setPoll(changedResponse);
-    setSelectedUsers(changedResponse.selectedUsers);
-    if(changedResponse.status == 'PROGRESS'){
-      updatePollStage(1);
-    }
-    setIsPollLoading(false);
-  }
+    setSelectedUsers(props.poll.selectedUsers);
+  }, [props.poll.selectedUsers]);
 
   function handleChange(value) {
     setSelectedUsers(value);
@@ -75,7 +40,7 @@ const PollStart = ({ updatePollStage }) => {
   async function startPoll() {
     setIsPollLoading(true);
     const response = await PollService.startPoll(pollId, selectedUsers);
-    updatePollStage(1);
+    props.updatePollStatus(response.status);
     setIsPollLoading(false);
   }
 
@@ -87,18 +52,19 @@ const PollStart = ({ updatePollStage }) => {
         </Space>
       ) : (
         <>
+        {props.poll.status}
           <Title level={2} className="page-header">
-            Опрос "{poll.title}"
+            Опрос "{props.poll.title}"
           </Title>
           <p className="poll-description">
             <b>Подробности:</b> Опрос займёт приблизительно{' '}
-            {countPollTime(poll.questionsCount, poll.respondentsCount)}
+            {countPollTime(props.poll.questionsCount, props.poll.respondentsCount)}
           </p>
           <p className="poll-description">
-            <b>Срок выполнения:</b> {poll.deadline}
+            <b>Срок выполнения:</b> {props.poll.deadline}
           </p>
           <p className="poll-description">
-            <b>Количество вопросов:</b> {poll.questionsCount}
+            <b>Количество вопросов:</b> {props.poll.questionsCount}
           </p>
           <p className="poll-description">
             <b>Оцениваемые коллеги</b>
@@ -108,12 +74,12 @@ const PollStart = ({ updatePollStage }) => {
             mode="multiple"
             size="large"
             placeholder="Выберите коллег"
-            options={usersList}
+            options={props.usersList}
             value={selectedUsers}
             onChange={handleChange}
             className="user-picker"
           />
-          
+
           <Button
             onClick={startPoll}
             type="primary"

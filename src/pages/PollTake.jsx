@@ -8,7 +8,7 @@ import PollService from '../API/PollService';
 const { Title } = Typography;
 const { Option } = Select;
 
-const PollTake = ({ updatePollStage }) => {
+const PollTake = ({ updatePollStatus }) => {
   const [question, setQuestion] = useState({
     questionId: '',
     text: '',
@@ -52,7 +52,7 @@ const PollTake = ({ updatePollStage }) => {
       getQuestion();
       setPairNumber(0);
     } else {
-      updatePollStage(2);
+      updatePollStatus('CLOSE');
     }
     setIsPollLoading(false);
   }
@@ -78,7 +78,7 @@ const PollTake = ({ updatePollStage }) => {
                   src={
                     process.env.PUBLIC_URL +
                     '/users/' +
-                    question.pairsOfPollInfo[pairNumber].person1.userId +
+                    question.pairsOfPollInfo[pairNumber].person1.secondName +
                     '.svg'
                   }
                   alt="user"
@@ -105,7 +105,7 @@ const PollTake = ({ updatePollStage }) => {
                   src={
                     process.env.PUBLIC_URL +
                     '/users/' +
-                    question.pairsOfPollInfo[pairNumber].person2.userId +
+                    question.pairsOfPollInfo[pairNumber].person2.secondName +
                     '.svg'
                   }
                   alt="user"
