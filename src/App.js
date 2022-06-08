@@ -3,6 +3,7 @@ import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { Polls } from './pages/Polls';
 import { Poll } from './pages/Poll';
 import { P404 } from './pages/P404';
+import { Profile } from './pages/Profile';
 import './App.css';
 import logo from './logo.png';
 import 'antd/dist/antd.css';
@@ -13,6 +14,10 @@ const menuPoints = [
   {
     title: 'Опросы',
     to: '/polls',
+  },
+  {
+    title: 'Профиль',
+    to: '/profile',
   },
 ];
 
@@ -42,6 +47,7 @@ function App() {
             <Route path="/" element={<Navigate to="/polls" replace />}></Route>
             <Route path="/polls" element={<Polls />}></Route>
             <Route path="/polls/:id" element={<Poll />}></Route>
+            <Route path="/profile" element={<Profile />}></Route>
             <Route path="*" element={<P404 />}></Route>
           </Routes>
         </Content>

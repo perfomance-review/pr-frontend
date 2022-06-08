@@ -32,7 +32,6 @@ const PollTake = ({ updatePollStage }) => {
     setIsPollLoading(true);
     const response = await PollService.getQuestion(pollId);
     setQuestion(response);
-    console.log(response);
     setIsPollLoading(false);
   }
 

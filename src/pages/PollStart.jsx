@@ -29,7 +29,6 @@ const PollStart = ({ updatePollStage }) => {
     title: '',
     questionsCount: 0,
     deadline: '',
-    respondents: [],
     users: [],
     respondentsCount: 0,
   });
@@ -63,6 +62,9 @@ const PollStart = ({ updatePollStage }) => {
     };
     setPoll(changedResponse);
     setSelectedUsers(changedResponse.selectedUsers);
+    if(changedResponse.status == 'PROGRESS'){
+      updatePollStage(1);
+    }
     setIsPollLoading(false);
   }
 
@@ -75,10 +77,6 @@ const PollStart = ({ updatePollStage }) => {
     const response = await PollService.startPoll(pollId, selectedUsers);
     updatePollStage(1);
     setIsPollLoading(false);
-  }
-
-  function continuePoll() {
-    updatePollStage(1);
   }
 
   return (
@@ -115,27 +113,16 @@ const PollStart = ({ updatePollStage }) => {
             onChange={handleChange}
             className="user-picker"
           />
-          {poll.status == 'OPEN' ? (
-            <Button
-              onClick={startPoll}
-              type="primary"
-              shape="round"
-              size="large"
-              className="start-button"
-            >
-              Начать
-            </Button>
-          ) : (
-            <Button
-              onClick={continuePoll}
-              type="primary"
-              shape="round"
-              size="large"
-              className="start-button"
-            >
-              Продолжить
-            </Button>
-          )}
+          
+          <Button
+            onClick={startPoll}
+            type="primary"
+            shape="round"
+            size="large"
+            className="start-button"
+          >
+            Начать
+          </Button>
         </>
       )}
     </div>
