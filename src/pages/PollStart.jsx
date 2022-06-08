@@ -52,7 +52,6 @@ const PollStart = (props) => {
         </Space>
       ) : (
         <>
-        {props.poll.status}
           <Title level={2} className="page-header">
             Опрос "{props.poll.title}"
           </Title>

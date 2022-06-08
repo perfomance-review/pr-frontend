@@ -17,9 +17,9 @@ const Profile = () => {
       <div className="profile-wrapper">
         <div className="profile-block">
           <p className="info-wrapper">
-            <img src={process.env.PUBLIC_URL + '/users/5f6b794a-bf0f-4a81-b28b-7e1faad011ec.svg'} alt="user" className="info-img" />
+            <img src={process.env.PUBLIC_URL + '/users/00000000-0000-0000-0000-000000000004.svg'} alt="user" className="info-img" />
             <Title level={4} className="page-header">
-              Ксения Кушнаренко
+              Патрисия Воронцова
             </Title>
           </p>
 

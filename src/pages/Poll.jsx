@@ -18,8 +18,7 @@ const Poll = () => {
     status: "",
   });
   const updatePollStatus = (value) => {
-    let newPoll = poll;
-    newPoll.status = value;
+    const newPoll = {...poll, status: value}
     setPoll(newPoll);
   };
   const [isPollLoading, setIsPollLoading] = useState(false);
@@ -52,6 +51,24 @@ const Poll = () => {
     setIsPollLoading(false);
   }
 
+  function showScreen(){
+    if (poll.status == 'OPEN') {
+      return (
+        <PollStart 
+              poll={poll}
+              usersList={usersList}
+              updatePollStatus={updatePollStatus} />
+      )
+    } else if (poll.status === 'PROGRESS') {
+      return  (
+        <PollTake 
+          updatePollStatus={updatePollStatus} /> 
+      )
+    } else{
+      return <PollResult />
+    }
+  }
+
   return (
     <div>
       {isPollLoading ? (
@@ -60,19 +77,7 @@ const Poll = () => {
         </Space>
       ) : (
         <>
-          {poll.status == 'OPEN' ? (
-            <PollStart 
-              poll={poll}
-              usersList={usersList}
-              updatePollStatus={updatePollStatus} />
-          ) : (
-            <>
-              {poll.status == 'PROGRESS' 
-                ? <PollTake 
-                    updatePollStatus={updatePollStatus} /> 
-                : <PollResult />}
-            </>
-          )}
+          {showScreen()}
         </>
       )}
     </div>

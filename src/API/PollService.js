@@ -41,6 +41,7 @@ export default class PostService {
     } catch (e) {
       openNotification();
       console.log(e);
+      throw e
     }
   }
   static async updateWinner(object) {

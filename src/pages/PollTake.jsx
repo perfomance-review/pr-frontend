@@ -37,7 +37,7 @@ const PollTake = ({ updatePollStatus }) => {
 
   async function updateWinner(winnerId) {
     setIsPollLoading(true);
-    let object = {
+    const userAnswer = {
       pollId: pollId,
       questionId: question.questionId,
       person1Id: question.pairsOfPollInfo[pairNumber].person1.userId,
@@ -45,14 +45,16 @@ const PollTake = ({ updatePollStatus }) => {
       winnerId: winnerId,
       isCompleted: !question.hasNext,
     };
-    const response = await PollService.updateWinner(object);
-    if (pairNumber + 1 < question.pairsOfPollInfo.length) {
-      setPairNumber(pairNumber + 1);
-    } else if (question.hasNext) {
-      getQuestion();
-      setPairNumber(0);
-    } else {
-      updatePollStatus('CLOSE');
+    const response = await PollService.updateWinner(userAnswer);
+    if(response){
+      if (pairNumber + 1 < question.pairsOfPollInfo.length) {
+        setPairNumber(pairNumber + 1);
+      } else if (question.hasNext) {
+        getQuestion();
+        setPairNumber(0);
+      } else {
+        updatePollStatus('CLOSE');
+      }
     }
     setIsPollLoading(false);
   }
@@ -78,7 +80,7 @@ const PollTake = ({ updatePollStatus }) => {
                   src={
                     process.env.PUBLIC_URL +
                     '/users/' +
-                    question.pairsOfPollInfo[pairNumber].person1.secondName +
+                    question.pairsOfPollInfo[pairNumber].person1.userId +
                     '.svg'
                   }
                   alt="user"
@@ -105,7 +107,7 @@ const PollTake = ({ updatePollStatus }) => {
                   src={
                     process.env.PUBLIC_URL +
                     '/users/' +
-                    question.pairsOfPollInfo[pairNumber].person2.secondName +
+                    question.pairsOfPollInfo[pairNumber].person2.userId +
                     '.svg'
                   }
                   alt="user"

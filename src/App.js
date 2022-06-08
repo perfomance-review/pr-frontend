@@ -5,6 +5,7 @@ import { Poll } from './pages/Poll';
 import { P404 } from './pages/P404';
 import { Profile } from './pages/Profile';
 import './App.css';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 import logo from './logo.png';
 import 'antd/dist/antd.css';
 import './index.css';
@@ -39,6 +40,9 @@ function App() {
               <Link to={point.to}>{point.title}</Link>
             </Menu.Item>
           ))}
+          <a href='https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q' target="_blank">
+            <QuestionCircleOutlined className="presentation-icon" />
+          </a>
         </Menu>
       </Sider>
       <Layout className="site-layout">
