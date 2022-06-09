@@ -4,6 +4,7 @@ import { Typography, Spin, Space } from 'antd';
 import 'antd/dist/antd.css';
 import { Select, Button } from 'antd';
 import PollService from '../API/PollService';
+import Statuses from '../API/Statuses';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -56,18 +57,14 @@ const PollTake = ({ updatePollStatus }) => {
       getQuestion();
       setPairNumber(0);
     } else {
-      updatePollStatus('CLOSE');
+      updatePollStatus(Statuses.getStatus('CLOSE'));
     }
     setIsPollLoading(false);
   }
 
   return (
     <div>
-      {isPollLoading ? (
-        <Space className="data-loader">
-          <Spin size="large" />
-        </Space>
-      ) : (
+      {!isPollLoading ? (
         <>
           <Title level={2} className="page-header">
             На оценку
@@ -134,6 +131,10 @@ const PollTake = ({ updatePollStatus }) => {
             </div>
           </div>
         </>
+      ) : (
+        <Space className="data-loader">
+          <Spin size="large" />
+        </Space>
       )}
     </div>
   );
