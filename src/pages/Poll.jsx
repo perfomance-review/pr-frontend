@@ -6,7 +6,7 @@ import { PollResult } from './PollResult';
 import PollService from '../API/PollService';
 import { Spin, Space } from 'antd';
 import 'antd/dist/antd.css';
-import Statuses from '../API/Statuses';
+import {Status} from '../API/Status';
 
 const Poll = () => {
   const [poll, setPoll] = useState({
@@ -53,7 +53,7 @@ const Poll = () => {
   }
 
   function showScreen(){
-    if (poll.status == Statuses.getStatus('OPEN')) {
+    if (poll.status == Status.Open) {
       return (
         <PollStart 
               poll={poll}
@@ -62,7 +62,7 @@ const Poll = () => {
       )
     } 
     
-    if (poll.status === Statuses.getStatus('PROGRESS')) {
+    if (poll.status === Status.Progress) {
       return  (
         <PollTake 
           updatePollStatus={updatePollStatus} /> 

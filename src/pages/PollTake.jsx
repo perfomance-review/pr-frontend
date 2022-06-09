@@ -4,7 +4,7 @@ import { Typography, Spin, Space } from 'antd';
 import 'antd/dist/antd.css';
 import { Select, Button } from 'antd';
 import PollService from '../API/PollService';
-import Statuses from '../API/Statuses';
+import {Status} from '../API/Status';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -57,7 +57,7 @@ const PollTake = ({ updatePollStatus }) => {
       getQuestion();
       setPairNumber(0);
     } else {
-      updatePollStatus(Statuses.getStatus('CLOSE'));
+      updatePollStatus(Status.Close);
     }
     setIsPollLoading(false);
   }
