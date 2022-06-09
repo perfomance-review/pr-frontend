@@ -25,13 +25,32 @@ export default class PostService {
       console.log(e);
     }
   }
-  static async startPoll(pollId,user_id) {
+  static async getQuestion(id) {
+    try {
+      const response = await axios.get('/api/comparepairsofpoll/' + id);
+      return response.data;
+    } catch (e) {
+      openNotification();
+      console.log(e);
+    }
+  }
+  static async startPoll(pollId, user_id) {
     try {
       const response = await axios.post('/api/start/' + pollId, user_id);
       return response.data;
     } catch (e) {
       openNotification();
       console.log(e);
+    }
+  }
+  static async updateWinner(object) {
+    try {
+      const response = await axios.post('/api/updatewinner/', object);
+      return response.data;
+    } catch (e) {
+      openNotification();
+      console.log(e);
+      throw e;
     }
   }
 }
