@@ -43,8 +43,8 @@ function countPollTime(questionsCount, respondentsCount) {
   return hDisplay + mDisplay;
 }
 
-function getDate(date){
-  return date.substr(8, 2) + '.' + date.substr(5, 2) + '.' +  date.substr(0, 4)
+function formatDate(date){
+  return new Date(date).toLocaleDateString('ru-RU');
 }
 
 const Polls = () => {
@@ -89,7 +89,7 @@ const Polls = () => {
                     </div>
                     <div>
                       <FieldTimeOutlined className="poll-card-detail-icon" />
-                      {getDate(poll.deadline)}
+                      {formatDate(poll.deadline)}
                     </div>
                   </div>
                 </Card>

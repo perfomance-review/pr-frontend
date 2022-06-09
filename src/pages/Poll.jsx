@@ -33,8 +33,8 @@ const Poll = () => {
     getPoll();
   }, []);
 
-  function getDate(date){
-    return date.substr(8, 2) + '.' + date.substr(5, 2) + '.' +  date.substr(0, 4)
+  function formatDate(date){
+    return new Date(date).toLocaleDateString('ru-RU');
   }
 
   async function getPoll() {
@@ -49,7 +49,7 @@ const Poll = () => {
       selectedUsers: response.respondents.map((item) => item.userId),
       title: response.title,
       questionsCount: response.questionsCount,
-      deadline: getDate(response.deadline),
+      deadline: formatDate(response.deadline),
       status: response.status,
       description: response.description,
     };
