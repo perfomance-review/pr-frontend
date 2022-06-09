@@ -33,6 +33,10 @@ const Poll = () => {
     getPoll();
   }, []);
 
+  function getDate(date){
+    return date.substr(8, 2) + '.' + date.substr(5, 2) + '.' +  date.substr(0, 4)
+  }
+
   async function getPoll() {
     setIsPollLoading(true);
     const response = await PollService.getPoll(pollId);
@@ -45,8 +49,9 @@ const Poll = () => {
       selectedUsers: response.respondents.map((item) => item.userId),
       title: response.title,
       questionsCount: response.questionsCount,
-      deadline: response.deadline,
+      deadline: getDate(response.deadline),
       status: response.status,
+      description: response.description,
     };
     setPoll(changedResponse);
     setIsPollLoading(false);
