@@ -4,6 +4,7 @@ import { PollStart } from './PollStart';
 import { PollTake } from './PollTake';
 import { PollResult } from './PollResult';
 import PollService from '../API/PollService';
+import AdditionalFunctions from '../API/AdditionalFunctions';
 import { Spin, Space } from 'antd';
 import 'antd/dist/antd.css';
 import {Status} from '../API/Status';
@@ -33,10 +34,6 @@ const Poll = () => {
     getPoll();
   }, []);
 
-  function formatDate(date){
-    return new Date(date).toLocaleDateString('ru-RU');
-  }
-
   async function getPoll() {
     setIsPollLoading(true);
     const response = await PollService.getPoll(pollId);
@@ -49,7 +46,7 @@ const Poll = () => {
       selectedUsers: response.respondents.map((item) => item.userId),
       title: response.title,
       questionsCount: response.questionsCount,
-      deadline: formatDate(response.deadline),
+      deadline: AdditionalFunctions.formatDate(response.deadline),
       status: response.status,
       description: response.description,
     };
