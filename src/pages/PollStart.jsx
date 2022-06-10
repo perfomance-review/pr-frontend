@@ -11,7 +11,9 @@ const { Option } = Select;
 
 const PollStart = (props) => {
   const [isPollLoading, setIsPollLoading] = useState(false);
-  const [pollTime, setPollTime] = useState(AdditionalFunctions.countPollTime(props.poll.questionsCount, props.poll.respondentsCount));
+  const [pollTime, setPollTime] = useState(
+    AdditionalFunctions.countPollTime(props.poll.questionsCount, props.poll.respondentsCount),
+  );
   const pollId = useParams().id;
   const [selectedUsers, setSelectedUsers] = useState(props.poll.selectedUsers);
 
@@ -20,7 +22,7 @@ const PollStart = (props) => {
   }, [props.poll.selectedUsers]);
 
   function handleChange(value) {
-    if(value.length >= 2){
+    if (value.length >= 2) {
       setSelectedUsers(value);
       setPollTime(AdditionalFunctions.countPollTime(props.poll.questionsCount, value.length));
     }
@@ -48,8 +50,7 @@ const PollStart = (props) => {
             <b>Описание:</b> {props.poll.description}
           </p>
           <p className="poll-description">
-            <b>Подробности:</b> Опрос займёт приблизительно{' '}
-            {pollTime}
+            <b>Подробности:</b> Опрос займёт приблизительно {pollTime}
           </p>
           <p className="poll-description">
             <b>Срок выполнения:</b> {props.poll.deadline}

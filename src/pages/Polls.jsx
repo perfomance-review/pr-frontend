@@ -41,7 +41,10 @@ const Polls = () => {
                   <p>{poll.description}</p>
                   <p>
                     Опрос займёт приблизительно{' '}
-                    {AdditionalFunctions.countPollTime(poll.questionsCount, poll.respondentsCount - 1)}
+                    {AdditionalFunctions.countPollTime(
+                      poll.questionsCount,
+                      poll.respondentsCount - 1,
+                    )}
                   </p>
                   <div className="poll-card-details">
                     <div>

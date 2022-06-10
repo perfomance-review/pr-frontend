@@ -40,7 +40,7 @@ function App() {
               <Link to={point.to}>{point.title}</Link>
             </Menu.Item>
           ))}
-          <a href='https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q' target="_blank">
+          <a href="https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q" target="_blank">
             <QuestionCircleOutlined className="presentation-icon" />
           </a>
         </Menu>

@@ -7,7 +7,7 @@ import PollService from '../API/PollService';
 import AdditionalFunctions from '../API/AdditionalFunctions';
 import { Spin, Space } from 'antd';
 import 'antd/dist/antd.css';
-import {Status} from '../API/Status';
+import { Status } from '../API/Status';
 
 const Poll = () => {
   const [poll, setPoll] = useState({
@@ -17,10 +17,10 @@ const Poll = () => {
     users: [],
     respondentsCount: 0,
     selectedUsers: [],
-    status: "",
+    status: '',
   });
   const updatePollStatus = (value) => {
-    const newPoll = {...poll, status: value}
+    const newPoll = { ...poll, status: value };
     setPoll(newPoll);
   };
   const [isPollLoading, setIsPollLoading] = useState(false);
@@ -54,23 +54,15 @@ const Poll = () => {
     setIsPollLoading(false);
   }
 
-  function showScreen(){
+  function showScreen() {
     if (poll.status == Status.Open) {
-      return (
-        <PollStart 
-              poll={poll}
-              usersList={usersList}
-              updatePollStatus={updatePollStatus} />
-      )
-    } 
-    
-    if (poll.status === Status.Progress) {
-      return  (
-        <PollTake 
-          updatePollStatus={updatePollStatus} /> 
-      )
+      return <PollStart poll={poll} usersList={usersList} updatePollStatus={updatePollStatus} />;
     }
-    return <PollResult />
+
+    if (poll.status === Status.Progress) {
+      return <PollTake updatePollStatus={updatePollStatus} />;
+    }
+    return <PollResult />;
   }
 
   return (
@@ -80,9 +72,7 @@ const Poll = () => {
           <Spin size="large" />
         </Space>
       ) : (
-        <>
-          {showScreen()}
-        </>
+        <>{showScreen()}</>
       )}
     </div>
   );
