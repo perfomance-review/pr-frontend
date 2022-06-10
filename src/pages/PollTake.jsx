@@ -4,7 +4,7 @@ import { Typography, Spin, Space } from 'antd';
 import 'antd/dist/antd.css';
 import { Select, Button } from 'antd';
 import PollService from '../API/PollService';
-import {Status} from '../API/Status';
+import { Status } from '../API/Status';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -49,7 +49,7 @@ const PollTake = ({ updatePollStatus }) => {
     try {
       const response = await PollService.updateWinner(userAnswer);
     } catch (e) {
-      return
+      return;
     }
     if (pairNumber + 1 < question.pairsOfPollInfo.length) {
       setPairNumber(pairNumber + 1);

@@ -4,48 +4,16 @@ import { Typography, Spin, Space } from 'antd';
 import 'antd/dist/antd.css';
 import { Select, Button } from 'antd';
 import PollService from '../API/PollService';
+import CommonFunctions from '../API/CommonFunctions';
 
 const { Title } = Typography;
 const { Option } = Select;
 
-function countPollTime(questionsCount, respondentsCount) {
-  let d = questionsCount * ((respondentsCount * (respondentsCount - 1)) / 2) * 5;
-  let h = Math.floor(d / 3600);
-  let m = Math.floor((d % 3600) / 60);
-  let s = Math.floor((d % 3600) % 60);
-
-  if (s > 0) {
-    m = m + 1;
-  }
-
-  function getMinutes(m){
-    if( m%10 == 1){
-      return ' минута '
-    } else if (m%10 == 0 || m%10 >= 5 && m%10 <= 9 || m%100 >= 11 && m%100 <= 14){
-      return ' минут '
-    } else {
-      return ' минуты '
-    }
-  }
-  
-  function getHours(h){
-    if( h%10 == 1){
-      return ' час '
-    } else if (h%10 == 0 || h%10 >= 5 && h%10 <= 9 || h%100 >= 11 && h%100 <= 14){
-      return ' часов '
-    } else {
-      return ' часа '
-    }
-  }
-
-  let hDisplay = h > 0 ? h + getHours(h) : '';
-  let mDisplay = m > 0 ? m + getMinutes(m) : '';
-
-  return hDisplay + mDisplay;
-}
-
 const PollStart = (props) => {
   const [isPollLoading, setIsPollLoading] = useState(false);
+  const [pollTime, setPollTime] = useState(
+    CommonFunctions.countPollTime(props.poll.questionsCount, props.poll.respondentsCount),
+  );
   const pollId = useParams().id;
   const [selectedUsers, setSelectedUsers] = useState(props.poll.selectedUsers);
 
@@ -54,7 +22,10 @@ const PollStart = (props) => {
   }, [props.poll.selectedUsers]);
 
   function handleChange(value) {
-    setSelectedUsers(value);
+    if (value.length >= 2) {
+      setSelectedUsers(value);
+      setPollTime(CommonFunctions.countPollTime(props.poll.questionsCount, value.length));
+    }
   }
 
   async function startPoll() {
@@ -79,8 +50,7 @@ const PollStart = (props) => {
             <b>Описание:</b> {props.poll.description}
           </p>
           <p className="poll-description">
-            <b>Подробности:</b> Опрос займёт приблизительно{' '}
-            {countPollTime(props.poll.questionsCount, props.poll.respondentsCount)}
+            <b>Подробности:</b> Опрос займёт приблизительно {pollTime}
           </p>
           <p className="poll-description">
             <b>Срок выполнения:</b> {props.poll.deadline}
