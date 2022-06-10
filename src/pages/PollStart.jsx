@@ -4,7 +4,7 @@ import { Typography, Spin, Space } from 'antd';
 import 'antd/dist/antd.css';
 import { Select, Button } from 'antd';
 import PollService from '../API/PollService';
-import AdditionalFunctions from '../API/AdditionalFunctions';
+import CommonFunctions from '../API/CommonFunctions';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -12,7 +12,7 @@ const { Option } = Select;
 const PollStart = (props) => {
   const [isPollLoading, setIsPollLoading] = useState(false);
   const [pollTime, setPollTime] = useState(
-    AdditionalFunctions.countPollTime(props.poll.questionsCount, props.poll.respondentsCount),
+    CommonFunctions.countPollTime(props.poll.questionsCount, props.poll.respondentsCount),
   );
   const pollId = useParams().id;
   const [selectedUsers, setSelectedUsers] = useState(props.poll.selectedUsers);
@@ -24,7 +24,7 @@ const PollStart = (props) => {
   function handleChange(value) {
     if (value.length >= 2) {
       setSelectedUsers(value);
-      setPollTime(AdditionalFunctions.countPollTime(props.poll.questionsCount, value.length));
+      setPollTime(CommonFunctions.countPollTime(props.poll.questionsCount, value.length));
     }
   }
 

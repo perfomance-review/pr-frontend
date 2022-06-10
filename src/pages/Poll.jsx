@@ -4,7 +4,7 @@ import { PollStart } from './PollStart';
 import { PollTake } from './PollTake';
 import { PollResult } from './PollResult';
 import PollService from '../API/PollService';
-import AdditionalFunctions from '../API/AdditionalFunctions';
+import CommonFunctions from '../API/CommonFunctions';
 import { Spin, Space } from 'antd';
 import 'antd/dist/antd.css';
 import { Status } from '../API/Status';
@@ -46,7 +46,7 @@ const Poll = () => {
       selectedUsers: response.respondents.map((item) => item.userId),
       title: response.title,
       questionsCount: response.questionsCount,
-      deadline: AdditionalFunctions.formatDate(response.deadline),
+      deadline: CommonFunctions.formatDate(response.deadline),
       status: response.status,
       description: response.description,
     };

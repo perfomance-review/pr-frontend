@@ -1,4 +1,4 @@
-export default class AdditionalFunction {
+export default class CommonFunctions {
   static formatDate(date) {
     return new Date(date).toLocaleDateString('ru-RU');
   }

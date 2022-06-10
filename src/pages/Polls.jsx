@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import { Card, Typography, Spin, Space } from 'antd';
 import { FieldTimeOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import PollService from '../API/PollService';
-import AdditionalFunctions from '../API/AdditionalFunctions';
+import CommonFunctions from '../API/CommonFunctions';
 const { Meta } = Card;
 const { Title } = Typography;
 
@@ -41,7 +41,7 @@ const Polls = () => {
                   <p>{poll.description}</p>
                   <p>
                     Опрос займёт приблизительно{' '}
-                    {AdditionalFunctions.countPollTime(
+                    {CommonFunctions.countPollTime(
                       poll.questionsCount,
                       poll.respondentsCount - 1,
                     )}
@@ -53,7 +53,7 @@ const Polls = () => {
                     </div>
                     <div>
                       <FieldTimeOutlined className="poll-card-detail-icon" />
-                      {AdditionalFunctions.formatDate(poll.deadline)}
+                      {CommonFunctions.formatDate(poll.deadline)}
                     </div>
                   </div>
                 </Card>
