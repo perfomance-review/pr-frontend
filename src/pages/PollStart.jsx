@@ -18,8 +18,28 @@ function countPollTime(questionsCount, respondentsCount) {
     m = m + 1;
   }
 
-  let hDisplay = h > 0 ? h + (h % 10 == 1 ? ' час ' : h % 10 < 5 ? ' часa ' : ' часов ') : '';
-  let mDisplay = m > 0 ? m + (m % 10 == 1 ? ' минута ' : m % 10 < 5 ? ' минуты ' : ' минут ') : '';
+  function getMinutes(m){
+    if( m%10 == 1){
+      return ' минута '
+    } else if (m%10 == 0 || m%10 >= 5 && m%10 <= 9 || m%100 >= 11 && m%100 <= 14){
+      return ' минут '
+    } else {
+      return ' минуты '
+    }
+  }
+  
+  function getHours(h){
+    if( h%10 == 1){
+      return ' час '
+    } else if (h%10 == 0 || h%10 >= 5 && h%10 <= 9 || h%100 >= 11 && h%100 <= 14){
+      return ' часов '
+    } else {
+      return ' часа '
+    }
+  }
+
+  let hDisplay = h > 0 ? h + getHours(h) : '';
+  let mDisplay = m > 0 ? m + getMinutes(m) : '';
 
   return hDisplay + mDisplay;
 }
@@ -55,6 +75,9 @@ const PollStart = (props) => {
           <Title level={2} className="page-header">
             Опрос "{props.poll.title}"
           </Title>
+          <p className="poll-description">
+            <b>Описание:</b> {props.poll.description}
+          </p>
           <p className="poll-description">
             <b>Подробности:</b> Опрос займёт приблизительно{' '}
             {countPollTime(props.poll.questionsCount, props.poll.respondentsCount)}
