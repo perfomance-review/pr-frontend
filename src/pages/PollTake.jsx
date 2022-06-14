@@ -71,7 +71,11 @@ const PollTake = ({ updatePollStatus }) => {
           </Title>
 
           <div className="question-page-wrapper">
-            <p className="question">{question.text}</p>
+            <p className="question">
+              <Title level={5} className="page-header">
+                {question.text}
+              </Title>
+            </p>
 
             <div className="answers-wrapper">
               <div className="answer">
