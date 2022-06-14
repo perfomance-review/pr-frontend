@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import 'antd/dist/antd.css';
 import { Card, Typography, Spin, Space } from 'antd';
 import { FieldTimeOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import PollService from '../API/PollService';

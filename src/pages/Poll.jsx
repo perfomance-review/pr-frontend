@@ -6,7 +6,6 @@ import { PollResult } from './PollResult';
 import PollService from '../API/PollService';
 import CommonFunctions from '../API/CommonFunctions';
 import { Spin, Space } from 'antd';
-import 'antd/dist/antd.css';
 import { Status } from '../API/Status';
 
 const Poll = () => {

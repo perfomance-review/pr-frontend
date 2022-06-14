@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import result from '../result.png';
 import { Typography } from 'antd';
-import 'antd/dist/antd.css';
 import { Select, Button } from 'antd';
 
 const { Title } = Typography;

@@ -4,6 +4,7 @@ import { Polls } from './pages/Polls';
 import { Poll } from './pages/Poll';
 import { P404 } from './pages/P404';
 import { Profile } from './pages/Profile';
+import { OverallRating } from './pages/OverallRating';
 import './App.css';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import logo from './logo.png';
@@ -19,6 +20,10 @@ const menuPoints = [
   {
     title: 'Профиль',
     to: '/profile',
+  },
+  {
+    title: 'Рейтинг',
+    to: '/overallRating',
   },
 ];
 
@@ -52,6 +57,7 @@ function App() {
             <Route path="/polls" element={<Polls />}></Route>
             <Route path="/polls/:id" element={<Poll />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/overallRating" element={<OverallRating />}></Route>
             <Route path="*" element={<P404 />}></Route>
           </Routes>
         </Content>

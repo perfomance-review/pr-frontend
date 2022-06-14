@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, Spin, Space } from 'antd';
-import 'antd/dist/antd.css';
 import { Select, Button } from 'antd';
 import PollService from '../API/PollService';
 import { Status } from '../API/Status';
@@ -71,7 +70,11 @@ const PollTake = ({ updatePollStatus }) => {
           </Title>
 
           <div className="question-page-wrapper">
-            <p className="question">{question.text}</p>
+            <p className="question">
+              <Title level={5} className="page-header">
+                {question.text}
+              </Title>
+            </p>
 
             <div className="answers-wrapper">
               <div className="answer">

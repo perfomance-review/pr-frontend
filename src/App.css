@@ -58,6 +58,14 @@
 .poll-card {
   width: 240px;
   margin: 10px;
+  background: #f8f8f8;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  height: 95%;
+}
+
+.ant-card-head{
+  border-bottom: 1px solid #ececec;
 }
 
 .poll-description {
@@ -100,17 +108,27 @@
   width: 100%;
 }
 
+.rating-table-wrapper{
+  width: 80%;
+  max-width: 500px;
+  margin: 30px auto 0;
+}
+
+.rating-img{
+  width: 100px;
+}
+
 .question-page-wrapper {
   width: 80%;
   margin: 0 auto;
 }
 
 .question {
-  background: #edeef0;
+  background: #f8f8f8;
   padding: 25px 40px;
-  margin: 70px 0 30px;
+  margin: 50px 0 30px;
   text-align: center;
-  border: 1px solid #e7e8ec;
+  border: 1px solid #ececec;
   border-radius: 10px;
 }
 
@@ -120,8 +138,8 @@
 }
 
 .answer {
-  background: #edeef0;
-  border: 1px solid #e7e8ec;
+  background: #f8f8f8;
+  border: 1px solid #ececec;
   border-radius: 10px;
   padding: 45px 40px;
   text-align: center;
@@ -152,10 +170,10 @@
 }
 
 .info-wrapper {
-  background: #edeef0;
+  background: #f8f8f8;
   padding: 15px;
   margin: 20px 0 10px;
-  border: 1px solid #e7e8ec;
+  border: 1px solid #ececec;
   border-radius: 10px;
   display: flex;
 }
