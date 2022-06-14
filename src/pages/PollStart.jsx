@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, Spin, Space } from 'antd';
-import 'antd/dist/antd.css';
 import { Select, Button } from 'antd';
 import PollService from '../API/PollService';
 import CommonFunctions from '../API/CommonFunctions';

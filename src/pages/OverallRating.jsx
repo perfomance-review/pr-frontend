@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Typography, Spin, Space } from 'antd';
-import 'antd/dist/antd.css';
 import { Select, Button, Table, Tag } from 'antd';
 
 const { Title } = Typography;
