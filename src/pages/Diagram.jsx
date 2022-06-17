@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
 
-const Diagram = () => {
+const Diagram = (props) => {
   const option = {
     title: {
       text: '',
@@ -11,13 +11,10 @@ const Diagram = () => {
       data: ['Результаты оценки'],
     },
     radar: {
-      indicator: [
-        { name: 'Профессионализм', max: 10 },
-        { name: 'Вовлеченность', max: 10 },
-        { name: 'Ответственность', max: 10 },
-        { name: 'Отзывчивость', max: 10 },
-        { name: 'Лидерство', max: 10 },
-      ],
+      indicator:  Object.entries(props.result).map((item) => ({
+        name: item[0],
+        max: 10,
+      })),
     },
     series: [
       {
@@ -25,7 +22,7 @@ const Diagram = () => {
         type: 'radar',
         data: [
           {
-            value: [8, 4, 6, 8, 2],
+            value: Object.entries(props.result).map((item) => item[1]),
             name: 'Результаты оценки',
           },
         ],
