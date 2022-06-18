@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { Polls } from './pages/Polls';
 import { Poll } from './pages/Poll';
@@ -11,6 +11,8 @@ import logo from './logo.png';
 import 'antd/dist/antd.css';
 import './index.css';
 import { Layout, Menu } from 'antd';
+import PollService from './API/PollService';
+import {useDispatch, useSelector} from 'react-redux';
 const { Content, Sider } = Layout;
 const menuPoints = [
   {
@@ -28,6 +30,17 @@ const menuPoints = [
 ];
 
 function App() {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  async function getUser() {
+    const response = await PollService.getUser();
+    dispatch({type: "ChangeUser", payload: response})
+  }
+
   return (
     <Layout hasSider>
       <Sider className="sider">
