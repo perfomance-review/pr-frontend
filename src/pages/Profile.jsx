@@ -66,11 +66,11 @@ const Profile = () => {
               ))}
             </div>
 
-            {Object.entries(result.resultForCompetences).length > 0 ? (
+            {Object.entries(result.resultForCompetences).length > 0 && (
               <div className="profile-block">
                 <Diagram result={result.resultForCompetences}/>
               </div>
-            ) : (<></>)}
+            )}
             
           </div>
         </>
