@@ -1,72 +1,80 @@
 import React, { useEffect, useState } from 'react';
-import { Typography } from 'antd';
+import { useParams } from 'react-router-dom';
 import 'antd/dist/antd.css';
-import { Select, Button } from 'antd';
+import { Select, Typography, Spin, Space } from 'antd';
 import { Diagram } from './Diagram';
+import {useSelector} from 'react-redux';
+import PollService from '../API/PollService';
 
 const { Title } = Typography;
 const { Option } = Select;
 
 const Profile = () => {
+  const user = useSelector(state => state.user);
+  const [result, setResult] = useState({"resultForQuestions":{},"resultForCompetences":{}});
+  const [isPollLoading, setIsPollLoading] = useState(false);
+  const pollId = useParams().id;
+
+  useEffect(() => {
+    getUserResult();
+  }, []);
+
+  async function getUserResult() {
+    setIsPollLoading(true);
+    const response = await PollService.getUserResult(pollId);
+    setResult(response);
+    setIsPollLoading(false);
+  }
   return (
     <div>
-      <Title level={2} className="page-header">
-        Профиль сотрудника
-      </Title>
+      {isPollLoading ? (
+        <Space className="data-loader">
+          <Spin size="large" />
+        </Space>
+      ) : (
+        <>
+          <Title level={2} className="page-header">
+            Профиль сотрудника
+          </Title>
 
-      <div className="profile-wrapper">
-        <div className="profile-block">
-          <p className="info-wrapper">
-            <img
-              src={process.env.PUBLIC_URL + '/users/00000000-0000-0000-0000-000000000004.svg'}
-              alt="user"
-              className="info-img"
-            />
-            <Title level={4} className="page-header">
-              Патрисия Воронцова
-            </Title>
-          </p>
+          <div className="profile-wrapper">
+            <div className="profile-block">
+              <div className="info-wrapper">
+                <img
+                  src={process.env.PUBLIC_URL + '/users/' + user.userId + '.svg'}
+                  alt="user"
+                  className="info-img"
+                />
+                <Title level={4} className="page-header">
+                  {user.firstName} {user.secondName}
+                </Title>
+              </div>
 
-          <div className="info-wrapper">
-            Кто, на твой взляд, лучше справляется со своими задачами?
-            <br />
-            (профессионализм)
+              {Object.entries(result.resultForQuestions).map((question, index) => (
+                <div>
+                  <div className="info-wrapper">
+                    {question[0]}
+                  </div>
+                  <input type="range" 
+                          min="0" 
+                          max="10" 
+                          value={question[1]} 
+                          step="1" 
+                          readOnly
+                          className="range purple" />
+                </div>
+              ))}
+            </div>
+
+            {Object.entries(result.resultForCompetences).length > 0 && (
+              <div className="profile-block">
+                <Diagram result={result.resultForCompetences}/>
+              </div>
+            )}
+            
           </div>
-          <input type="range" min="0" max="10" value="8" step="1" className="range purple" />
-
-          <div className="info-wrapper">
-            Кто чаще других вовлекается в рабочие задачи и готов помогать другим?
-            <br />
-            (вовлеченность)
-          </div>
-          <input type="range" min="0" max="10" value="4" step="1" className="range purple" />
-
-          <div className="info-wrapper">
-            Кто более ответственно подходит к выполнению задач?
-            <br />
-            (ответственность)
-          </div>
-          <input type="range" min="0" max="10" value="6" step="1" className="range purple" />
-
-          <div className="info-wrapper">
-            Кто скорее отзовется на помощь коллегам?
-            <br />
-            (отзывчивость)
-          </div>
-          <input type="range" min="0" max="10" value="8" step="1" className="range purple" />
-
-          <div className="info-wrapper">
-            К чьему мнению чаще прислушиваются?
-            <br />
-            (лидерство)
-          </div>
-          <input type="range" min="0" max="10" value="2" step="1" className="range purple" />
-        </div>
-
-        <div className="profile-block">
-          <Diagram />
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };

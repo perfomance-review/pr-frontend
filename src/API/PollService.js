@@ -25,6 +25,15 @@ export default class PostService {
       console.log(e);
     }
   }
+  static async getUserResult(id) {
+    try {
+      const response = await axios.get('/api/result/' + id);
+      return response.data;
+    } catch (e) {
+      openNotification();
+      console.log(e);
+    }
+  }
   static async getUser() {
     try {
       const response = await axios.get('/api/getuser/');
