@@ -43,7 +43,7 @@ function getRoleTitle(role) {
   return '';
 }
 
-function StartPage({ deleteCookie }) {
+function StartPage({ onLogout }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   useEffect(() => {
@@ -93,7 +93,7 @@ function StartPage({ deleteCookie }) {
               <p className="current-user-name">{user.secondName}</p>
               <p className="current-user-role">{getRoleTitle(user.role)}</p>
             </div>
-            <LogoutOutlined className="logout-icon" onClick={deleteCookie} />
+            <LogoutOutlined className="logout-icon" onClick={(e) => {onLogout("user-id");}} />
           </div>
         </Menu>
       </Sider>

@@ -4,4 +4,8 @@ export default class Cookies {
     if (results) return unescape(results[2]);
     else return null;
   }
+
+  static deleteCookie(cookieName, cookieValue) {
+    document.cookie = cookieName + '=' + cookieValue + ';max-age=-1';
+  }
 }

@@ -15,14 +15,14 @@ function App() {
     setIsLogin(Cookies.getCookie('user-id'));
   }, []);
 
-  const deleteCookie = (values) => {
-    document.cookie = 'user-id=' + user.userId + ';max-age=-1';
+  const onLogout = (values) => {
+    Cookies.deleteCookie(values, user.userId)
     setIsLogin(Cookies.getCookie('user-id'));
   };
 
   return (
     <div className="h100 login-page">
-      {isLogin ? <StartPage deleteCookie={deleteCookie} /> : <LoginPage setIsLogin={setIsLogin} />}
+      {isLogin ? <StartPage onLogout={onLogout} /> : <LoginPage setIsLogin={setIsLogin} />}
     </div>
   );
 }
