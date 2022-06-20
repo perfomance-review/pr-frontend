@@ -43,7 +43,7 @@
   margin: 20px 0 0 10px;
 }
 
-.login-logo-text{
+.login-logo-text {
   color: white;
   font-weight: 500;
   line-height: 1.2;
@@ -79,7 +79,7 @@
   height: 95%;
 }
 
-.ant-card-head{
+.ant-card-head {
   border-bottom: 1px solid #ececec;
 }
 
@@ -122,13 +122,13 @@
   width: 100%;
 }
 
-.rating-table-wrapper{
+.rating-table-wrapper {
   width: 80%;
   max-width: 500px;
   margin: 30px auto 0;
 }
 
-.rating-img{
+.rating-img {
   width: 100px;
 }
 
@@ -287,21 +287,21 @@ input[type='range']::-moz-range-thumb:active {
   font-size: 20px;
 }
 
-.central-part{
+.central-part {
   width: 350px;
   margin: auto;
 }
 
-.h100{
+.h100 {
   height: 100%;
 }
 
-.login-page{
+.login-page {
   background: #001529;
   display: flex;
 }
 
-.login-form-wrap{
+.login-form-wrap {
   background: #f8f8f8;
   padding: 20px 20px 0 20px;
   text-align: center;
@@ -310,7 +310,7 @@ input[type='range']::-moz-range-thumb:active {
   text-align: center;
 }
 
-.current-user{
+.current-user {
   bottom: 0;
   display: flex;
   justify-content: space-between;
@@ -318,18 +318,18 @@ input[type='range']::-moz-range-thumb:active {
   width: 200px;
 }
 
-.current-user-img{
+.current-user-img {
   margin: 0 10px 10px;
   width: 40px;
   height: 40px;
 }
 
-.current-user-name{
+.current-user-name {
   line-height: 0.3;
   font-weight: 500;
 }
 
-.current-user-role{
+.current-user-role {
   line-height: 0.3;
 }
 

@@ -10,7 +10,7 @@ import logo from '../logo.png';
 import 'antd/dist/antd.css';
 import { Layout, Menu } from 'antd';
 import PollService from '../API/PollService';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 const { Content, Sider } = Layout;
 const menuPoints = [
   {
@@ -30,29 +30,29 @@ const menuPoints = [
   },
 ];
 
-function getRoleTitle(role){
-  if(role == "ADMINISTRATOR"){
-    return "Администратор"
-  } 
-  if(role == "MANAGER"){
-    return "Менеджер"
-  } 
-  if(role == "RESPONDENT"){
-    return "Сотрудник"
-  } 
-  return ""
+function getRoleTitle(role) {
+  if (role == 'ADMINISTRATOR') {
+    return 'Администратор';
+  }
+  if (role == 'MANAGER') {
+    return 'Менеджер';
+  }
+  if (role == 'RESPONDENT') {
+    return 'Сотрудник';
+  }
+  return '';
 }
 
-function StartPage({deleteCookie}) {
+function StartPage({ deleteCookie }) {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
   useEffect(() => {
     getUser();
   }, []);
 
   async function getUser() {
     const response = await PollService.getUser();
-    dispatch({type: "ChangeUser", payload: response})
+    dispatch({ type: 'ChangeUser', payload: response });
   }
 
   return (
@@ -67,37 +67,34 @@ function StartPage({deleteCookie}) {
           </p>
         </div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
-            {menuPoints.map((point, index) => (
+          {menuPoints.map(
+            (point, index) =>
               point.role == user.role && (
                 <Menu.Item key={index}>
                   <Link to={point.to}>{point.title}</Link>
                 </Menu.Item>
-              )
-            ))}
-            <a className="presentation-icon" href="https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q" target="_blank">
-                <QuestionCircleOutlined />
-            </a>
-            <div className="current-user">
-                <img
-                    src={process.env.PUBLIC_URL + '/users/' + user.userId + '.svg'}
-                    alt="user"
-                    className="current-user-img"
-                />
-                <div>
-                    <p className="current-user-name">
-                        {user.firstName}
-                    </p>
-                    <p className="current-user-name">
-                        {user.secondName}
-                    </p>
-                    <p className="current-user-role">
-                      {getRoleTitle(user.role)}
-                    </p>
-                </div>
-                <LogoutOutlined 
-                    className="logout-icon"
-                    onClick={deleteCookie} />
+              ),
+          )}
+          <a
+            className="presentation-icon"
+            href="https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q"
+            target="_blank"
+          >
+            <QuestionCircleOutlined />
+          </a>
+          <div className="current-user">
+            <img
+              src={process.env.PUBLIC_URL + '/users/' + user.userId + '.svg'}
+              alt="user"
+              className="current-user-img"
+            />
+            <div>
+              <p className="current-user-name">{user.firstName}</p>
+              <p className="current-user-name">{user.secondName}</p>
+              <p className="current-user-role">{getRoleTitle(user.role)}</p>
             </div>
+            <LogoutOutlined className="logout-icon" onClick={deleteCookie} />
+          </div>
         </Menu>
       </Sider>
       <Layout className="site-layout">

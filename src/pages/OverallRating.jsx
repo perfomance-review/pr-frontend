@@ -9,15 +9,13 @@ const columns = [
     title: '',
     dataIndex: 'userId',
     key: 'userId',
-    render: (text) => 
+    render: (text) => (
       <img
-        src={
-          process.env.PUBLIC_URL +
-          '/users/' + text + '.svg'
-        }
+        src={process.env.PUBLIC_URL + '/users/' + text + '.svg'}
         alt="user"
         className="rating-img"
-      />,
+      />
+    ),
   },
   {
     title: 'Сотрудник',
@@ -32,16 +30,13 @@ const columns = [
   {
     title: 'Профиль',
     key: 'profile',
-    render: () => 
+    render: () => (
       <a href="/profile">
-        <Button
-          type="primary"
-          shape="round"
-          size="default"
-        >
+        <Button type="primary" shape="round" size="default">
           Подробнее
         </Button>
-      </a>,
+      </a>
+    ),
   },
 ];
 const data = [
@@ -77,15 +72,14 @@ const OverallRating = () => {
           </Title>
 
           <div className="question-page-wrapper">
-              <Title level={5} className="question">
-                1. Соответствие занимаемой позиции («Кто, на твой взгляд, лучше справляется со своими задачами?»)
-              </Title>
+            <Title level={5} className="question">
+              1. Соответствие занимаемой позиции («Кто, на твой взгляд, лучше справляется со своими
+              задачами?»)
+            </Title>
           </div>
 
           <div className="rating-table-wrapper">
-            <Table columns={columns} 
-              dataSource={data}
-              pagination={false} />
+            <Table columns={columns} dataSource={data} pagination={false} />
           </div>
         </>
       ) : (

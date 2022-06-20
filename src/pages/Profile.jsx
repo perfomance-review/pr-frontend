@@ -3,15 +3,15 @@ import { useParams } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import { Select, Typography, Spin, Space } from 'antd';
 import { Diagram } from './Diagram';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import PollService from '../API/PollService';
 
 const { Title } = Typography;
 const { Option } = Select;
 
 const Profile = () => {
-  const user = useSelector(state => state.user);
-  const [result, setResult] = useState({"resultForQuestions":{},"resultForCompetences":{}});
+  const user = useSelector((state) => state.user);
+  const [result, setResult] = useState({ resultForQuestions: {}, resultForCompetences: {} });
   const [isPollLoading, setIsPollLoading] = useState(false);
   const pollId = useParams().id;
 
@@ -52,26 +52,25 @@ const Profile = () => {
 
               {Object.entries(result.resultForQuestions).map((question, index) => (
                 <div>
-                  <div className="info-wrapper">
-                    {question[0]}
-                  </div>
-                  <input type="range" 
-                          min="0" 
-                          max="10" 
-                          value={question[1]} 
-                          step="1" 
-                          readOnly
-                          className="range purple" />
+                  <div className="info-wrapper">{question[0]}</div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="10"
+                    value={question[1]}
+                    step="1"
+                    readOnly
+                    className="range purple"
+                  />
                 </div>
               ))}
             </div>
 
             {Object.entries(result.resultForCompetences).length > 0 && (
               <div className="profile-block">
-                <Diagram result={result.resultForCompetences}/>
+                <Diagram result={result.resultForCompetences} />
               </div>
             )}
-            
           </div>
         </>
       )}
