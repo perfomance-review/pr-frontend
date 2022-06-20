@@ -30,6 +30,24 @@ const menuPoints = [
   },
 ];
 
+const respondentMenuItems = [
+    {
+        key: 'polls',
+        label: (<Link to="/polls">Опросы</Link>)
+    },
+    {
+        key: 'profile',
+        label: (<Link to="/profile/65059ad5-a41d-4970-9d8b-72e507334367">Профиль</Link>)
+    },
+];
+
+const managerMenuItems = [
+    {
+        key: 'overallRating',
+        label: (<Link to="/overallRating">Рейтинг</Link>)
+    },
+];
+
 function getRoleTitle(role) {
   if (role == 'ADMINISTRATOR') {
     return 'Администратор';
@@ -66,36 +84,30 @@ function StartPage({ onLogout }) {
             review
           </p>
         </div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
-          {menuPoints.map(
-            (point, index) =>
-              point.role == user.role && (
-                <Menu.Item key={index}>
-                  <Link to={point.to}>{point.title}</Link>
-                </Menu.Item>
-              ),
-          )}
-          <a
-            className="presentation-icon"
-            href="https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q"
-            target="_blank"
-          >
-            <QuestionCircleOutlined />
-          </a>
-          <div className="current-user">
-            <img
-              src={process.env.PUBLIC_URL + '/users/' + user.userId + '.svg'}
-              alt="user"
-              className="current-user-img"
-            />
-            <div>
-              <p className="current-user-name">{user.firstName}</p>
-              <p className="current-user-name">{user.secondName}</p>
-              <p className="current-user-role">{getRoleTitle(user.role)}</p>
-            </div>
-            <LogoutOutlined className="logout-icon" onClick={(e) => {onLogout("user-id");}} />
+        <Menu items={user.role == "RESPONDENT" ? respondentMenuItems : managerMenuItems} 
+              theme="dark" 
+              mode="inline"
+              defaultSelectedKeys={['polls']} />
+        <a
+          className="presentation-icon"
+          href="https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q"
+          target="_blank"
+        >
+          <QuestionCircleOutlined />
+        </a>
+        <div className="current-user">
+          <img
+            src={process.env.PUBLIC_URL + '/users/' + user.userId + '.svg'}
+            alt="user"
+            className="current-user-img"
+          />
+          <div>
+            <p className="current-user-name">{user.firstName}</p>
+            <p className="current-user-name">{user.secondName}</p>
+            <p className="current-user-role">{getRoleTitle(user.role)}</p>
           </div>
-        </Menu>
+          <LogoutOutlined className="logout-icon" onClick={(e) => {onLogout("user-id");}} />
+        </div>
       </Sider>
       <Layout className="site-layout">
         <Content className="site-content">

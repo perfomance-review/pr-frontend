@@ -325,11 +325,13 @@ input[type='range']::-moz-range-thumb:active {
 }
 
 .current-user-name {
+  color: white;
   line-height: 0.3;
   font-weight: 500;
 }
 
 .current-user-role {
+  color: white;
   line-height: 0.3;
 }
 
