@@ -7,9 +7,11 @@ const initialState = {
   },
 };
 
+const CHANGE_USER = 'CHANGE_USER';
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case 'ChangeUser':
+    case CHANGE_USER:
       return {
         ...state,
         user: action.payload,
@@ -18,3 +20,5 @@ export default function reducer(state = initialState, action) {
       return state;
   }
 }
+
+export const changeUserAction = (payload) => ({type: CHANGE_USER, payload});

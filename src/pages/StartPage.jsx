@@ -53,7 +53,7 @@ function StartPage({ onLogout }) {
 
   async function getUser() {
     const response = await PollService.getUser();
-    dispatch({ type: 'ChangeUser', payload: response });
+    dispatch(changeUserAction(response));
   }
 
   return (
