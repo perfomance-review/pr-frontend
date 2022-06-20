@@ -16,16 +16,32 @@ const menuPoints = [
   {
     title: 'Опросы',
     to: '/polls',
+    role: 'RESPONDENT',
   },
   {
     title: 'Профиль',
     to: '/profile/65059ad5-a41d-4970-9d8b-72e507334367',
+    role: 'RESPONDENT',
   },
   {
     title: 'Рейтинг',
     to: '/overallRating',
+    role: 'MANAGER',
   },
 ];
+
+function getRoleTitle(role){
+  if(role == "ADMINISTRATOR"){
+    return "Администратор"
+  } 
+  if(role == "MANAGER"){
+    return "Менеджер"
+  } 
+  if(role == "RESPONDENT"){
+    return "Сотрудник"
+  } 
+  return ""
+}
 
 function StartPage({deleteCookie}) {
   const dispatch = useDispatch();
@@ -52,9 +68,11 @@ function StartPage({deleteCookie}) {
         </div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
             {menuPoints.map((point, index) => (
+              point.role == user.role && (
                 <Menu.Item key={index}>
-                <Link to={point.to}>{point.title}</Link>
+                  <Link to={point.to}>{point.title}</Link>
                 </Menu.Item>
+              )
             ))}
             <a className="presentation-icon" href="https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q" target="_blank">
                 <QuestionCircleOutlined />
@@ -73,12 +91,7 @@ function StartPage({deleteCookie}) {
                         {user.secondName}
                     </p>
                     <p className="current-user-role">
-                        {user.role == "ADMINISTRATOR" 
-                            ? "Администратор"
-                            : user.role == "MANAGER"
-                            ? "Менеджер"
-                            : user.role == "RESPONDENT"
-                            ? "Сотрудник" : ""}
+                      {getRoleTitle(user.role)}
                     </p>
                 </div>
                 <LogoutOutlined 
