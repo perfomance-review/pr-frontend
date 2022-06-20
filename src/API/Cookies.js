@@ -8,4 +8,8 @@ export default class Cookies {
   static deleteCookie(cookieName, cookieValue) {
     document.cookie = cookieName + '=' + cookieValue + ';max-age=-1';
   }
+
+  static setCookie(cookieName, cookieValue) {
+    document.cookie = cookieName + '=' + cookieValue;
+  }
 }

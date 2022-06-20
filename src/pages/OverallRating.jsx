@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Typography, Spin, Space } from 'antd';
 import { Select, Button, Table, Tag } from 'antd';
 
@@ -31,11 +32,11 @@ const columns = [
     title: 'Профиль',
     key: 'profile',
     render: () => (
-      <a href="/profile">
+      <Link to="/profile">
         <Button type="primary" shape="round" size="default">
           Подробнее
         </Button>
-      </a>
+      </Link>
     ),
   },
 ];

@@ -15,9 +15,9 @@ function App() {
     setIsLogin(Cookies.getCookie('user-id'));
   }, []);
 
-  const onLogout = (values) => {
-    Cookies.deleteCookie(values, user.userId)
-    setIsLogin(Cookies.getCookie('user-id'));
+  const onLogout = (cookieName) => {
+    Cookies.deleteCookie(cookieName, user.userId)
+    setIsLogin(Cookies.getCookie(cookieName));
   };
 
   return (

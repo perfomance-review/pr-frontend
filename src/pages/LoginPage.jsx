@@ -5,7 +5,7 @@ import { Form, Input, Button } from 'antd';
 
 function LoginPage({ setIsLogin }) {
   const onFinish = (values) => {
-    document.cookie = 'user-id=' + values.userId;
+    Cookies.setCookie('user-id', values.userId);
     setIsLogin(Cookies.getCookie('user-id'));
   };
 

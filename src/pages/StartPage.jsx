@@ -12,23 +12,6 @@ import { Layout, Menu } from 'antd';
 import PollService from '../API/PollService';
 import { useDispatch, useSelector } from 'react-redux';
 const { Content, Sider } = Layout;
-const menuPoints = [
-  {
-    title: 'Опросы',
-    to: '/polls',
-    role: 'RESPONDENT',
-  },
-  {
-    title: 'Профиль',
-    to: '/profile/65059ad5-a41d-4970-9d8b-72e507334367',
-    role: 'RESPONDENT',
-  },
-  {
-    title: 'Рейтинг',
-    to: '/overallRating',
-    role: 'MANAGER',
-  },
-];
 
 const respondentMenuItems = [
     {
@@ -111,14 +94,20 @@ function StartPage({ onLogout }) {
       </Sider>
       <Layout className="site-layout">
         <Content className="site-content">
-          <Routes>
-            <Route path="/" element={<Navigate to="/polls" replace />}></Route>
-            <Route path="/polls" element={<Polls />}></Route>
-            <Route path="/polls/:id" element={<Poll />}></Route>
-            <Route path="/profile/:id" element={<Profile />}></Route>
-            <Route path="/overallRating" element={<OverallRating />}></Route>
-            <Route path="*" element={<P404 />}></Route>
-          </Routes>
+          {user.role == "RESPONDENT" &&
+            <Routes>
+              <Route path="/" element={<Navigate to="/polls" replace />}></Route>
+              <Route path="/polls" element={<Polls />}></Route>
+              <Route path="/polls/:id" element={<Poll />}></Route>
+              <Route path="/profile/:id" element={<Profile />}></Route>
+              <Route path="*" element={<P404 />}></Route>
+            </Routes>}
+          {user.role == "MANAGER" &&
+            <Routes>
+              <Route path="/" element={<Navigate to="/overallRating" replace />}></Route>
+              <Route path="/overallRating" element={<OverallRating />}></Route>
+              <Route path="*" element={<P404 />}></Route>
+            </Routes>}
         </Content>
       </Layout>
     </Layout>
