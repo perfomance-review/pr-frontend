@@ -1,81 +1,29 @@
-import React, { useEffect } from 'react';
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
-import { Polls } from './pages/Polls';
-import { Poll } from './pages/Poll';
-import { P404 } from './pages/P404';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Profile } from './pages/Profile';
-import { OverallRating } from './pages/OverallRating';
 import './App.css';
-import { QuestionCircleOutlined } from '@ant-design/icons';
-import logo from './logo.png';
 import 'antd/dist/antd.css';
 import './index.css';
-import { Layout, Menu } from 'antd';
-import PollService from './API/PollService';
-import {useDispatch, useSelector} from 'react-redux';
-const { Content, Sider } = Layout;
-const menuPoints = [
-  {
-    title: 'Опросы',
-    to: '/polls',
-  },
-  {
-    title: 'Профиль',
-    to: '/profile',
-  },
-  {
-    title: 'Рейтинг',
-    to: '/overallRating',
-  },
-];
+import StartPage from './pages/StartPage';
+import LoginPage from './pages/LoginPage';
+import Cookies from './API/Cookies';
 
 function App() {
-  const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
+  const [isLogin, setIsLogin] = useState(false);
+  const user = useSelector((state) => state.user);
   useEffect(() => {
-    getUser();
+    setIsLogin(Cookies.getCookie('user-id'));
   }, []);
 
-  async function getUser() {
-    const response = await PollService.getUser();
-    dispatch({type: "ChangeUser", payload: response})
-  }
+  const onLogout = (cookieName) => {
+    Cookies.deleteCookie(cookieName, user.userId)
+    setIsLogin(Cookies.getCookie(cookieName));
+  };
 
   return (
-    <Layout hasSider>
-      <Sider className="sider">
-        <div className="logo">
-          <img src={logo} className="logo-img" alt="logo" />
-          <p className="logo-text">
-            Performance
-            <br />
-            review
-          </p>
-        </div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
-          {menuPoints.map((point, index) => (
-            <Menu.Item key={index}>
-              <Link to={point.to}>{point.title}</Link>
-            </Menu.Item>
-          ))}
-          <a href="https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q" target="_blank">
-            <QuestionCircleOutlined className="presentation-icon" />
-          </a>
-        </Menu>
-      </Sider>
-      <Layout className="site-layout">
-        <Content className="site-content">
-          <Routes>
-            <Route path="/" element={<Navigate to="/polls" replace />}></Route>
-            <Route path="/polls" element={<Polls />}></Route>
-            <Route path="/polls/:id" element={<Poll />}></Route>
-            <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/overallRating" element={<OverallRating />}></Route>
-            <Route path="*" element={<P404 />}></Route>
-          </Routes>
-        </Content>
-      </Layout>
-    </Layout>
+    <div className="h100 login-page">
+      {isLogin ? <StartPage onLogout={onLogout} /> : <LoginPage setIsLogin={setIsLogin} />}
+    </div>
   );
 }
 

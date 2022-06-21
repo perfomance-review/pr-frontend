@@ -29,11 +29,26 @@
   justify-content: flex-start;
 }
 
+.login-logo {
+  height: 100px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
 .logo-text {
   color: white;
   font-weight: 500;
   line-height: 1.2;
   margin: 20px 0 0 10px;
+}
+
+.login-logo-text {
+  color: white;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 32px 0 0 10px;
+  font-size: 30px;
 }
 
 .logo-img {
@@ -64,7 +79,7 @@
   height: 95%;
 }
 
-.ant-card-head{
+.ant-card-head {
   border-bottom: 1px solid #ececec;
 }
 
@@ -84,7 +99,6 @@
 
 .presentation-icon {
   position: absolute;
-  bottom: 15px;
   left: 15px;
   font-size: 40px;
   color: white;
@@ -108,13 +122,13 @@
   width: 100%;
 }
 
-.rating-table-wrapper{
+.rating-table-wrapper {
   width: 80%;
   max-width: 500px;
   margin: 30px auto 0;
 }
 
-.rating-img{
+.rating-img {
   width: 100px;
 }
 
@@ -271,4 +285,58 @@ input[type='range']::-moz-range-thumb:active {
   content: '🙂';
   margin-left: 10px;
   font-size: 20px;
+}
+
+.central-part {
+  width: 350px;
+  margin: auto;
+}
+
+.h100 {
+  height: 100%;
+}
+
+.login-page {
+  background: #001529;
+  display: flex;
+}
+
+.login-form-wrap {
+  background: #f8f8f8;
+  padding: 20px 20px 0 20px;
+  text-align: center;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.current-user {
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 200px;
+}
+
+.current-user-img {
+  margin: 0 10px 10px;
+  width: 40px;
+  height: 40px;
+}
+
+.current-user-name {
+  color: white;
+  line-height: 0.3;
+  font-weight: 500;
+}
+
+.current-user-role {
+  color: white;
+  line-height: 0.3;
+}
+
+.logout-icon {
+  font-size: 25px;
+  color: white;
+  margin-right: 10px;
 }

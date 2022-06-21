@@ -11,7 +11,7 @@ const Diagram = (props) => {
       data: ['Результаты оценки'],
     },
     radar: {
-      indicator:  Object.entries(props.result).map((item) => ({
+      indicator: Object.entries(props.result).map((item) => ({
         name: item[0],
         max: 10,
       })),
