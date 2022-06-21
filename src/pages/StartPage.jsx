@@ -11,7 +11,7 @@ import 'antd/dist/antd.css';
 import { Layout, Menu } from 'antd';
 import PollService from '../API/PollService';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeUserAction } from '../reducer';
+import { changeUserAction } from '../reducers/user';
 const { Content, Sider } = Layout;
 
 const respondentMenuItems = [
