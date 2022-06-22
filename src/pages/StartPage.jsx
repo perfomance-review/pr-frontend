@@ -3,6 +3,8 @@ import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { Polls } from './Polls';
 import { Poll } from './Poll';
 import { P404 } from './P404';
+import { ClosedPolls } from './ClosedPolls';
+import { ManagerPolls } from './ManagerPolls';
 import { Profile } from './Profile';
 import { OverallRating } from './OverallRating';
 import { QuestionCircleOutlined, LogoutOutlined } from '@ant-design/icons';
@@ -21,15 +23,15 @@ const respondentMenuItems = [
     },
     {
         key: 'profile',
-        label: (<Link to="/profile/65059ad5-a41d-4970-9d8b-72e507334367">Профиль</Link>)
+        label: (<Link to="/profile/">Рейтинг</Link>)
     },
 ];
 
 const managerMenuItems = [
-    {
-        key: 'overallRating',
-        label: (<Link to="/overallRating">Рейтинг</Link>)
-    },
+  {
+      key: 'managerPolls',
+      label: (<Link to="/managerPolls/">Рейтинг</Link>)
+  },
 ];
 
 function getRoleTitle(role) {
@@ -100,13 +102,15 @@ function StartPage({ onLogout }) {
               <Route path="/" element={<Navigate to="/polls" replace />}></Route>
               <Route path="/polls" element={<Polls />}></Route>
               <Route path="/polls/:id" element={<Poll />}></Route>
+              <Route path="/profile" element={<ClosedPolls />}></Route>
               <Route path="/profile/:id" element={<Profile />}></Route>
               <Route path="*" element={<P404 />}></Route>
             </Routes>}
           {user.role == "MANAGER" &&
             <Routes>
-              <Route path="/" element={<Navigate to="/overallRating" replace />}></Route>
-              <Route path="/overallRating" element={<OverallRating />}></Route>
+              <Route path="/" element={<Navigate to="/managerPolls" replace />}></Route>
+              <Route path="/managerPolls" element={<ManagerPolls />}></Route>
+              <Route path="/overallRating/:id" element={<OverallRating />}></Route>
               <Route path="*" element={<P404 />}></Route>
             </Routes>}
         </Content>

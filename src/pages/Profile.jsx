@@ -11,7 +11,7 @@ const { Option } = Select;
 
 const Profile = () => {
   const user = useSelector((state) => state.user);
-  const [result, setResult] = useState({ resultForQuestions: {}, resultForCompetences: {} });
+  const [result, setResult] = useState({ resultForQuestions: [], resultForCompetences: [] });
   const [isPollLoading, setIsPollLoading] = useState(false);
   const pollId = useParams().id;
 
@@ -50,14 +50,17 @@ const Profile = () => {
                 </Title>
               </div>
 
-              {Object.entries(result.resultForQuestions).map((question, index) => (
-                <div>
-                  <div className="info-wrapper">{question[0]}</div>
+              {result.resultForQuestions.map((question, index) => (
+                <div key={index}>
+                  <div className="info-wrapper">
+                    {question.textQuestion}
+                    <br/>({question.textCompetence})
+                  </div>
                   <input
                     type="range"
                     min="0"
                     max="10"
-                    value={question[1]}
+                    value={question.score}
                     step="1"
                     readOnly
                     className="range purple"
@@ -66,7 +69,7 @@ const Profile = () => {
               ))}
             </div>
 
-            {Object.entries(result.resultForCompetences).length > 0 && (
+            {result.resultForCompetences.length > 0 && (
               <div className="profile-block">
                 <Diagram result={result.resultForCompetences} />
               </div>
