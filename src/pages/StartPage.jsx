@@ -4,7 +4,6 @@ import { Polls } from './Polls';
 import { Poll } from './Poll';
 import { P404 } from './P404';
 import { ClosedPolls } from './ClosedPolls';
-import { ManagerPolls } from './ManagerPolls';
 import { Profile } from './Profile';
 import { OverallRating } from './OverallRating';
 import { QuestionCircleOutlined, LogoutOutlined } from '@ant-design/icons';
@@ -17,20 +16,20 @@ import { changeUserAction } from '../reducers/user';
 const { Content, Sider } = Layout;
 
 const respondentMenuItems = [
-    {
-        key: 'polls',
-        label: (<Link to="/polls">Опросы</Link>)
-    },
-    {
-        key: 'profile',
-        label: (<Link to="/profile/">Рейтинг</Link>)
-    },
+  {
+      key: 'polls',
+      label: (<Link to="/polls">Опросы</Link>)
+  },
+  {
+      key: 'profile',
+      label: (<Link to="/profile/">Рейтинг</Link>)
+  },
 ];
 
 const managerMenuItems = [
   {
-      key: 'managerPolls',
-      label: (<Link to="/managerPolls/">Рейтинг</Link>)
+    key: 'overallRating',
+    label: (<Link to="/overallRating">Рейтинг</Link>)
   },
 ];
 
@@ -108,9 +107,8 @@ function StartPage({ onLogout }) {
             </Routes>}
           {user.role == "MANAGER" &&
             <Routes>
-              <Route path="/" element={<Navigate to="/managerPolls" replace />}></Route>
-              <Route path="/managerPolls" element={<ManagerPolls />}></Route>
-              <Route path="/overallRating/:id" element={<OverallRating />}></Route>
+              <Route path="/" element={<Navigate to="/overallRating" replace />}></Route>
+              <Route path="/overallRating" element={<OverallRating />}></Route>
               <Route path="*" element={<P404 />}></Route>
             </Routes>}
         </Content>

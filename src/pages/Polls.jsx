@@ -17,7 +17,7 @@ const Polls = () => {
 
   async function getPolls() {
     setIsPollsLoading(true);
-    const response = await PollService.getUserPolls('status=OPEN&status=PROGRESS');
+    const response = await PollService.getUserPolls(['OPEN','PROGRESS']);
     setPolls(response);
     setIsPollsLoading(false);
   }

@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Typography, Spin, Space } from 'antd';
+import { Card, Typography, Spin, Space, notification } from 'antd';
 import { FieldTimeOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import PollService from '../API/PollService';
 import CommonFunctions from '../API/CommonFunctions';
 const { Meta } = Card;
 const { Title } = Typography;
 
-function completedAlert(){
-  alert("Результаты опроса будут доступны после deadline")
-}
+const openNotification = () => {
+  notification.open({
+    message: 'Результаты опроса будут доступны после deadline',
+    description: '',
+  });
+};
 
 const ClosedPolls = () => {
   const [polls, setPolls] = useState([]);
@@ -21,7 +24,7 @@ const ClosedPolls = () => {
 
   async function getPolls() {
     setIsPollsLoading(true);
-    const response = await PollService.getUserPolls('status=COMPLETED&status=CLOSED');
+    const response = await PollService.getUserPolls(['COMPLETED','CLOSED']);
     setPolls(response);
     setIsPollsLoading(false);
   }
@@ -55,7 +58,11 @@ const ClosedPolls = () => {
                     </div>
                   </Card>
                 </Link>)
-              :(<Card hoverable className="poll-card" title={poll.title} key={poll.pollId} onClick={completedAlert}>
+              :(<Card hoverable 
+                      className="poll-card" 
+                      title={poll.title} 
+                      key={poll.pollId} 
+                      onClick={openNotification}>
                   <p>{poll.description}</p>
                   <div className="poll-card-details">
                     <div>
