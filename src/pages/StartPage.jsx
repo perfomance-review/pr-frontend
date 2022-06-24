@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
-import { Polls } from './Polls';
+import { AvailablePolls } from './AvailablePolls';
 import { Poll } from './Poll';
 import { P404 } from './P404';
 import { ClosedPolls } from './ClosedPolls';
@@ -17,8 +17,8 @@ const { Content, Sider } = Layout;
 
 const respondentMenuItems = [
   {
-      key: 'polls',
-      label: (<Link to="/polls">Опросы</Link>)
+      key: 'availablePolls',
+      label: (<Link to="/availablePolls">Опросы</Link>)
   },
   {
       key: 'profile',
@@ -98,9 +98,9 @@ function StartPage({ onLogout }) {
         <Content className="site-content">
           {user.role == "RESPONDENT" &&
             <Routes>
-              <Route path="/" element={<Navigate to="/polls" replace />}></Route>
-              <Route path="/polls" element={<Polls />}></Route>
-              <Route path="/polls/:id" element={<Poll />}></Route>
+              <Route path="/" element={<Navigate to="/availablePolls" replace />}></Route>
+              <Route path="/availablePolls" element={<AvailablePolls />}></Route>
+              <Route path="/availablePolls/:id" element={<Poll />}></Route>
               <Route path="/profile" element={<ClosedPolls />}></Route>
               <Route path="/profile/:id" element={<Profile />}></Route>
               <Route path="*" element={<P404 />}></Route>

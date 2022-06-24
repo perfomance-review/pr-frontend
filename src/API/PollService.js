@@ -9,11 +9,11 @@ const openNotification = () => {
 export default class PostService {
   static async getUserPolls(statuses) {
     try {
-      let query = '';
-      for(let status of statuses) {
-        query = query + 'status=' + status + '&';
-      }
-      const response = await axios.get('/api/polls?' + query);
+      const params = new URLSearchParams();
+      statuses.forEach((status) => {
+          params.append('status', status);
+      })
+      const response = await axios.get('/api/polls', {params})
       return response.data.polls;
     } catch (e) {
       openNotification();
