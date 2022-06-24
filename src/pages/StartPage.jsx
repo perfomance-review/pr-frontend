@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
-import { Polls } from './Polls';
+import { AvailablePolls } from './AvailablePolls';
 import { Poll } from './Poll';
 import { P404 } from './P404';
+import { ClosedPolls } from './ClosedPolls';
 import { Profile } from './Profile';
 import { OverallRating } from './OverallRating';
 import { QuestionCircleOutlined, LogoutOutlined } from '@ant-design/icons';
@@ -15,21 +16,21 @@ import { changeUserAction } from '../reducers/user';
 const { Content, Sider } = Layout;
 
 const respondentMenuItems = [
-    {
-        key: 'polls',
-        label: (<Link to="/polls">Опросы</Link>)
-    },
-    {
-        key: 'profile',
-        label: (<Link to="/profile/65059ad5-a41d-4970-9d8b-72e507334367">Профиль</Link>)
-    },
+  {
+      key: 'availablePolls',
+      label: (<Link to="/availablePolls">Опросы</Link>)
+  },
+  {
+      key: 'profile',
+      label: (<Link to="/profile/">Рейтинг</Link>)
+  },
 ];
 
 const managerMenuItems = [
-    {
-        key: 'overallRating',
-        label: (<Link to="/overallRating">Рейтинг</Link>)
-    },
+  {
+    key: 'overallRating',
+    label: (<Link to="/overallRating">Рейтинг</Link>)
+  },
 ];
 
 function getRoleTitle(role) {
@@ -97,9 +98,10 @@ function StartPage({ onLogout }) {
         <Content className="site-content">
           {user.role == "RESPONDENT" &&
             <Routes>
-              <Route path="/" element={<Navigate to="/polls" replace />}></Route>
-              <Route path="/polls" element={<Polls />}></Route>
-              <Route path="/polls/:id" element={<Poll />}></Route>
+              <Route path="/" element={<Navigate to="/availablePolls" replace />}></Route>
+              <Route path="/availablePolls" element={<AvailablePolls />}></Route>
+              <Route path="/availablePolls/:id" element={<Poll />}></Route>
+              <Route path="/profile" element={<ClosedPolls />}></Route>
               <Route path="/profile/:id" element={<Profile />}></Route>
               <Route path="*" element={<P404 />}></Route>
             </Routes>}

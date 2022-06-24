@@ -11,8 +11,8 @@ const Diagram = (props) => {
       data: ['Результаты оценки'],
     },
     radar: {
-      indicator: Object.entries(props.result).map((item) => ({
-        name: item[0],
+      indicator: props.result.map((item) => ({
+        name: item.textCompetence,
         max: 10,
       })),
     },
@@ -22,7 +22,7 @@ const Diagram = (props) => {
         type: 'radar',
         data: [
           {
-            value: Object.entries(props.result).map((item) => item[1]),
+            value: props.result.map((item) => item.score),
             name: 'Результаты оценки',
           },
         ],

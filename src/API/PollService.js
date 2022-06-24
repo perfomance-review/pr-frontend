@@ -7,9 +7,13 @@ const openNotification = () => {
   });
 };
 export default class PostService {
-  static async getUserPolls() {
+  static async getUserPolls(statuses) {
     try {
-      const response = await axios.get('/api/polls');
+      const params = new URLSearchParams();
+      statuses.forEach((status) => {
+          params.append('status', status);
+      })
+      const response = await axios.get('/api/polls', {params})
       return response.data.polls;
     } catch (e) {
       openNotification();
@@ -69,6 +73,15 @@ export default class PostService {
       openNotification();
       console.log(e);
       throw e;
+    }
+  }
+  static async getRating(pollId) {
+    try {
+      const response = await axios.get('/api/rating/' + pollId);
+      return response.data.questionsAndUsersWithScore;
+    } catch (e) {
+      openNotification();
+      console.log(e);
     }
   }
 }
