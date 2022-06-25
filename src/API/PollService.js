@@ -29,6 +29,15 @@ export default class PostService {
       console.log(e);
     }
   }
+  static async getOverallRating(id) {
+    try {
+      const response = await axios.get('/api/rating/' + id);
+      return response.data.questionsAndUsersWithScore;
+    } catch (e) {
+      openNotification();
+      console.log(e);
+    }
+  }
   static async getUserResult(id) {
     try {
       const response = await axios.get('/api/result/' + id);
