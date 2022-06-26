@@ -44,23 +44,17 @@ const columns = [
 ];
 
 function changeUsersList(users, pollId){
-  let usersList = [];
-  users.forEach(function(item, index, array) {
-    let user = {
-      userId: item.userInfo.userId,
-      user: item.userInfo.firstName + ' ' + item.userInfo.secondName,
-      score: item.score,
-      profile: pollId,
-    }
-    usersList.push(user)
-  });
-  return usersList
+  return users.map((item) => ( {
+    userId: item.userInfo.userId,
+    user: item.userInfo.firstName + ' ' + item.userInfo.secondName,
+    score: item.score,
+    profile: pollId,
+  }))
 }
 
 const OverallRating = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [overallRating, setOverallRating] = useState([]);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
   //const pollId = useParams().id;
   const pollId = 'd2fc6508-dda2-4b24-9df9-956e428f8a0c';
 
@@ -84,32 +78,19 @@ const OverallRating = () => {
           </Title>
 
           {overallRating.length > 0 &&
-                <>
-                  <div className="question-page-wrapper">
-                    <Title level={5} className="question">
-                      { overallRating[currentQuestion].textCompetence } ({ overallRating[currentQuestion].textQuestion })
-                    </Title>
-                  </div>
-                  <div className='change-questions-button-wrapper'>
-                    <Button 
-                      size="large" 
-                      icon={<LeftOutlined /> }
-                      onClick={(event) => {
-                        setCurrentQuestion(currentQuestion - 1);
-                      }}
-                      disabled={currentQuestion <= 0} />
-                    <Button 
-                      size="large" 
-                      icon={<RightOutlined />}
-                      onClick={(event) => {
-                        setCurrentQuestion(currentQuestion + 1);
-                      }}
-                      disabled={currentQuestion >= overallRating.length - 1} />
-                  </div>
-                  <div className="rating-table-wrapper">
-                    <Table columns={columns} dataSource={ changeUsersList(overallRating[currentQuestion].usersWithScore, pollId) } pagination={false} />
-                  </div>
-                </>
+            overallRating.map((question, index) => (
+              <div key={index}>
+                <div className="question-page-wrapper">
+                  <Title level={5} className="question">
+                    { question.textCompetence } ({ question.textQuestion })
+                  </Title>
+                </div>
+                
+                <div className="rating-table-wrapper">
+                  <Table columns={columns} dataSource={ changeUsersList(question.usersWithScore, pollId) } pagination={false} />
+                </div>
+                </div>
+              ))
           }
         </>
       ) : (
