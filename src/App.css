@@ -340,3 +340,7 @@ input[type='range']::-moz-range-thumb:active {
   color: white;
   margin-right: 10px;
 }
+
+.change-questions-button-wrapper{
+  text-align: center;
+}

@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Typography, Spin, Space } from 'antd';
-import { Select, Button, Table, Tag } from 'antd';
+import { Select, Button, Table } from 'antd';
+import PollService from '../API/PollService';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -25,8 +27,8 @@ const columns = [
   },
   {
     title: 'Баллы',
-    dataIndex: 'marks',
-    key: 'marks',
+    dataIndex: 'score',
+    key: 'score',
   },
   {
     title: 'Профиль',
@@ -40,48 +42,56 @@ const columns = [
     ),
   },
 ];
-const data = [
-  {
-    userId: '00000000-0000-0000-0000-000000000004',
-    user: 'John Brown',
-    marks: 32,
-    profile: '00000000-0000-0000-0000-000000000004',
-  },
-  {
-    userId: '00000000-0000-0000-0000-000000000004',
-    user: 'John Brown',
-    marks: 32,
-    profile: '00000000-0000-0000-0000-000000000004',
-  },
-  {
-    userId: '00000000-0000-0000-0000-000000000004',
-    user: 'John Brown',
-    marks: 32,
-    profile: '00000000-0000-0000-0000-000000000004',
-  },
-];
+
+function changeUsersList(users, pollId){
+  return users.map((item) => ( {
+    userId: item.userInfo.userId,
+    user: item.userInfo.firstName + ' ' + item.userInfo.secondName,
+    score: item.score,
+    profile: pollId,
+  }))
+}
 
 const OverallRating = () => {
-  const [isPollLoading, setIsPollLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [overallRating, setOverallRating] = useState([]);
+  //const pollId = useParams().id;
+  const pollId = 'd2fc6508-dda2-4b24-9df9-956e428f8a0c';
+
+  useEffect(() => {
+    getOverallRating();
+  }, []);
+
+  async function getOverallRating() {
+    setIsLoading(true);
+    const response = await PollService.getOverallRating(pollId);
+    setOverallRating(response);
+    setIsLoading(false);
+  }
 
   return (
     <div>
-      {!isPollLoading ? (
+      {!isLoading ? (
         <>
           <Title level={2} className="page-header">
             Рейтинг, на основании оценок сотрудников
           </Title>
 
-          <div className="question-page-wrapper">
-            <Title level={5} className="question">
-              1. Соответствие занимаемой позиции («Кто, на твой взгляд, лучше справляется со своими
-              задачами?»)
-            </Title>
-          </div>
-
-          <div className="rating-table-wrapper">
-            <Table columns={columns} dataSource={data} pagination={false} />
-          </div>
+          {overallRating.length > 0 &&
+            overallRating.map((question, index) => (
+              <div key={index}>
+                <div className="question-page-wrapper">
+                  <Title level={5} className="question">
+                    { question.textCompetence } ({ question.textQuestion })
+                  </Title>
+                </div>
+                
+                <div className="rating-table-wrapper">
+                  <Table columns={columns} dataSource={ changeUsersList(question.usersWithScore, pollId) } pagination={false} />
+                </div>
+                </div>
+              ))
+          }
         </>
       ) : (
         <Space className="data-loader">
