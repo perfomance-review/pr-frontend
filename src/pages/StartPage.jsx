@@ -91,7 +91,7 @@ function StartPage({ onLogout }) {
             <p className="current-user-name">{user.secondName}</p>
             <p className="current-user-role">{getRoleTitle(user.role)}</p>
           </div>
-          <LogoutOutlined className="logout-icon" onClick={(e) => {onLogout("user-id");}} />
+          <LogoutOutlined className="logout-icon" onClick={(e) => {onLogout("access-token");}} />
         </div>
       </Sider>
       <Layout className="site-layout">

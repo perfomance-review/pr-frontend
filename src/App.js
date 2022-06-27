@@ -12,7 +12,7 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
   const user = useSelector((state) => state.user);
   useEffect(() => {
-    setIsLogin(Cookies.getCookie('user-id'));
+    setIsLogin(Cookies.getCookie('access-token'));
   }, []);
 
   const onLogout = (cookieName) => {

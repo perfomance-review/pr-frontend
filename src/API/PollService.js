@@ -93,4 +93,13 @@ export default class PostService {
       console.log(e);
     }
   }
+  static async login(loginInfo) {
+    try {
+      const response = await axios.post('/api/auth/login/', loginInfo);
+      return response.data;
+    } catch (e) {
+      openNotification();
+      console.log(e);
+    }
+  }
 }
