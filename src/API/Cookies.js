@@ -6,7 +6,7 @@ export default class Cookies {
   }
 
   static deleteCookie(cookieName) {
-    document.cookie = cookieName + '=123' + ';max-age=-1';
+    document.cookie = cookieName + '=0' + ';max-age=-1';
   }
 
   static setCookie(cookieName, cookieValue) {
