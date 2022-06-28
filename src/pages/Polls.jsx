@@ -77,7 +77,7 @@ const Polls = (props) => {
                       title={poll.title} 
                       key={poll.pollId} 
                       onClick={(event) => {
-                        openNotification('Результаты опроса будут доступны после deadline','');
+                        openNotification('Результаты опроса будут доступны после deadline');
                       }}>
                   <p>{poll.description}</p>
                   <div className="poll-card-details">

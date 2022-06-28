@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { openNotification } from '../API/Notification';
+import { openDefaultNotification } from '../API/Notification';
 
-export default class PostService {
+export default class UserService {
   static async getUser() {
     try {
       const response = await axios.get('/api/getuser/');
       return response.data;
     } catch (e) {
-      openNotification('Что-то пошло не так','Попробуйте обновить страницу');
+      openDefaultNotification();
       console.log(e);
     }
   }
@@ -16,7 +16,7 @@ export default class PostService {
       const response = await axios.post('/api/auth/login/', loginInfo);
       return response.data;
     } catch (e) {
-      openNotification('Что-то пошло не так','Попробуйте обновить страницу');
+      openDefaultNotification();
       console.log(e);
     }
   }
