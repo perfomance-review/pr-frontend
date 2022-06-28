@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Profile } from './pages/Profile';
 import './App.css';
@@ -9,15 +9,12 @@ import LoginPage from './pages/LoginPage';
 import Cookies from './API/Cookies';
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(!!Cookies.getCookie('access-token'));
   const user = useSelector((state) => state.user);
-  useEffect(() => {
-    setIsLogin(Cookies.getCookie('user-id'));
-  }, []);
 
-  const onLogout = (cookieName) => {
-    Cookies.deleteCookie(cookieName, user.userId)
-    setIsLogin(Cookies.getCookie(cookieName));
+  const onLogout = () => {
+    Cookies.deleteCookie("access-token")
+    setIsLogin(false);
   };
 
   return (

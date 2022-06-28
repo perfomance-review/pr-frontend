@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../logo.png';
 import Cookies from '../API/Cookies';
 import { Form, Input, Button } from 'antd';
+import UserService from '../API/UserService';
 
 function LoginPage({ setIsLogin }) {
   const onFinish = (values) => {
-    Cookies.setCookie('user-id', values.userId);
-    setIsLogin(Cookies.getCookie('user-id'));
+    const loginInfo = {
+      "email" : values.email,
+      "password": values.password
+    }
+    login(loginInfo)
   };
+
+  const [loadingLogin, setLoadingLogin] = useState(false);
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+
+  const [loadings, setLoadings] = useState(false);
+
+  async function login(loginInfo) {
+    setLoadings(true);
+    const response = await UserService.login(loginInfo);
+    Cookies.setCookie('access-token', response['access-token']);
+    setIsLogin(true);
+    setLoadings(false);
+  }
 
   return (
     <div className="central-part">
@@ -30,18 +46,38 @@ function LoginPage({ setIsLogin }) {
         className="login-form-wrap"
       >
         <Form.Item
-          name="userId"
+          name="email"
           rules={[
             {
+              type: 'email',
+              message: 'Введен неверный e-mail',
+            },
+            {
               required: true,
-              message: 'UserId обязателен для заполнения!',
+              message: 'E-mail обязателен для заполнения',
             },
           ]}
         >
-          <Input placeholder="User Id" />
+          <Input placeholder="E-mail" />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: 'Пароль обязателен для заполнения',
+            },
+          ]}
+        >
+          <Input.Password placeholder="Пароль" />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" shape="round" size="large">
+          <Button 
+            type="primary" 
+            htmlType="submit" 
+            shape="round" 
+            size="large"
+            loading={loadings}>
             Войти
           </Button>
         </Form.Item>
