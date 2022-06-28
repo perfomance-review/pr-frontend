@@ -10,7 +10,7 @@ import { QuestionCircleOutlined, LogoutOutlined } from '@ant-design/icons';
 import logo from '../logo.png';
 import 'antd/dist/antd.css';
 import { Layout, Menu } from 'antd';
-import PollService from '../API/PollService';
+import UserService from '../API/UserService';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeUserAction } from '../reducers/user';
 const { Content, Sider } = Layout;
@@ -54,7 +54,7 @@ function StartPage({ onLogout }) {
   }, []);
 
   async function getUser() {
-    const response = await PollService.getUser();
+    const response = await UserService.getUser();
     dispatch(changeUserAction(response));
   }
 
@@ -91,7 +91,7 @@ function StartPage({ onLogout }) {
             <p className="current-user-name">{user.secondName}</p>
             <p className="current-user-role">{getRoleTitle(user.role)}</p>
           </div>
-          <LogoutOutlined className="logout-icon" onClick={(e) => {onLogout("access-token");}} />
+          <LogoutOutlined className="logout-icon" onClick={(e) => {onLogout();}} />
         </div>
       </Sider>
       <Layout className="site-layout">

@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Typography, Spin, Space, notification } from 'antd';
+import { Card, Typography, Spin, Space } from 'antd';
 import { FieldTimeOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import PollService from '../API/PollService';
 import CommonFunctions from '../API/CommonFunctions';
+import { openNotification } from '../API/Notification';
 const { Meta } = Card;
 const { Title } = Typography;
-
-const openNotification = () => {
-  notification.open({
-    message: 'Результаты опроса будут доступны после deadline',
-    description: '',
-  });
-};
 
 const Polls = (props) => {
   const [polls, setPolls] = useState([]);
@@ -82,7 +76,9 @@ const Polls = (props) => {
                       className="poll-card" 
                       title={poll.title} 
                       key={poll.pollId} 
-                      onClick={openNotification}>
+                      onClick={(event) => {
+                        openNotification('Результаты опроса будут доступны после deadline','');
+                      }}>
                   <p>{poll.description}</p>
                   <div className="poll-card-details">
                     <div>

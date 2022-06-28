@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../logo.png';
 import Cookies from '../API/Cookies';
 import { Form, Input, Button } from 'antd';
-import PollService from '../API/PollService';
+import UserService from '../API/UserService';
 
 function LoginPage({ setIsLogin }) {
   const onFinish = (values) => {
@@ -13,17 +13,20 @@ function LoginPage({ setIsLogin }) {
     login(loginInfo)
   };
 
+  const [loadingLogin, setLoadingLogin] = useState(false);
+
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
 
+  const [loadings, setLoadings] = useState(false);
+
   async function login(loginInfo) {
-    //setIsPollLoading(true);
-    const response = await PollService.login(loginInfo);
+    setLoadings(true);
+    const response = await UserService.login(loginInfo);
     Cookies.setCookie('access-token', response['access-token']);
-    setIsLogin(Cookies.getCookie('access-token'));
-    console.log(response);
-    //setIsPollLoading(false);
+    setIsLogin(true);
+    setLoadings(false);
   }
 
   return (
@@ -69,7 +72,12 @@ function LoginPage({ setIsLogin }) {
           <Input.Password placeholder="Пароль" />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" shape="round" size="large">
+          <Button 
+            type="primary" 
+            htmlType="submit" 
+            shape="round" 
+            size="large"
+            loading={loadings}>
             Войти
           </Button>
         </Form.Item>

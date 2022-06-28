@@ -1,11 +1,5 @@
 import axios from 'axios';
-import { notification } from 'antd';
-const openNotification = () => {
-  notification.open({
-    message: 'Что-то пошло не так',
-    description: 'Попробуйте обновить страницу',
-  });
-};
+import { openNotification } from '../API/Notification';
 export default class PostService {
   static async getUserPolls(statuses) {
     try {
@@ -16,7 +10,7 @@ export default class PostService {
       const response = await axios.get('/api/polls', {params})
       return response.data.polls;
     } catch (e) {
-      openNotification();
+      openNotification('Что-то пошло не так','Попробуйте обновить страницу');
       console.log(e);
     }
   }
@@ -25,7 +19,7 @@ export default class PostService {
       const response = await axios.get('/api/polls/' + id);
       return response.data;
     } catch (e) {
-      openNotification();
+      openNotification('Что-то пошло не так','Попробуйте обновить страницу');
       console.log(e);
     }
   }
@@ -34,7 +28,7 @@ export default class PostService {
       const response = await axios.get('/api/rating/' + id);
       return response.data.questionsAndUsersWithScore;
     } catch (e) {
-      openNotification();
+      openNotification('Что-то пошло не так','Попробуйте обновить страницу');
       console.log(e);
     }
   }
@@ -43,16 +37,7 @@ export default class PostService {
       const response = await axios.get('/api/result/' + id);
       return response.data;
     } catch (e) {
-      openNotification();
-      console.log(e);
-    }
-  }
-  static async getUser() {
-    try {
-      const response = await axios.get('/api/getuser/');
-      return response.data;
-    } catch (e) {
-      openNotification();
+      openNotification('Что-то пошло не так','Попробуйте обновить страницу');
       console.log(e);
     }
   }
@@ -61,7 +46,7 @@ export default class PostService {
       const response = await axios.get('/api/comparepairsofpoll/' + id);
       return response.data;
     } catch (e) {
-      openNotification();
+      openNotification('Что-то пошло не так','Попробуйте обновить страницу');
       console.log(e);
     }
   }
@@ -70,7 +55,7 @@ export default class PostService {
       const response = await axios.post('/api/start/' + pollId, user_id);
       return response.data;
     } catch (e) {
-      openNotification();
+      openNotification('Что-то пошло не так','Попробуйте обновить страницу');
       console.log(e);
     }
   }
@@ -79,7 +64,7 @@ export default class PostService {
       const response = await axios.post('/api/updatewinner/', object);
       return response.data;
     } catch (e) {
-      openNotification();
+      openNotification('Что-то пошло не так','Попробуйте обновить страницу');
       console.log(e);
       throw e;
     }
@@ -89,16 +74,7 @@ export default class PostService {
       const response = await axios.get('/api/rating/' + pollId);
       return response.data.questionsAndUsersWithScore;
     } catch (e) {
-      openNotification();
-      console.log(e);
-    }
-  }
-  static async login(loginInfo) {
-    try {
-      const response = await axios.post('/api/auth/login/', loginInfo);
-      return response.data;
-    } catch (e) {
-      openNotification();
+      openNotification('Что-то пошло не так','Попробуйте обновить страницу');
       console.log(e);
     }
   }
