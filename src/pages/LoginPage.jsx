@@ -13,8 +13,6 @@ function LoginPage({ setIsLogin }) {
     login(loginInfo)
   };
 
-  const [loadingLogin, setLoadingLogin] = useState(false);
-
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
@@ -24,8 +22,11 @@ function LoginPage({ setIsLogin }) {
   async function login(loginInfo) {
     setLoadings(true);
     const response = await UserService.login(loginInfo);
-    Cookies.setCookie('access-token', response['access-token']);
-    setIsLogin(true);
+    const token = response?.['access-token'];
+    if (token) {
+        Cookies.setCookie('access-token', token);
+        setIsLogin(true);
+    }
     setLoadings(false);
   }
 
