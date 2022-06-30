@@ -56,7 +56,7 @@ const OverallRating = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [overallRating, setOverallRating] = useState([]);
   //const pollId = useParams().id;
-  const pollId = 'd2fc6508-dda2-4b24-9df9-956e428f8a0c';
+  const pollId = 'c125e6e9-5dbc-4452-8c7e-faf749b7be41';
 
   useEffect(() => {
     getOverallRating();
