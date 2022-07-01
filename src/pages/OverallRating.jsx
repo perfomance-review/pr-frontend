@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Typography, Spin, Space } from 'antd';
 import { Select, Button, Table } from 'antd';
@@ -55,8 +56,8 @@ function changeUsersList(users, pollId){
 const OverallRating = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [overallRating, setOverallRating] = useState([]);
-  //const pollId = useParams().id;
-  const pollId = 'c125e6e9-5dbc-4452-8c7e-faf749b7be41';
+  const pollId = useParams().id;
+  //const pollId = 'c125e6e9-5dbc-4452-8c7e-faf749b7be41';
 
   useEffect(() => {
     getOverallRating();

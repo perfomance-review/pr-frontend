@@ -5,6 +5,7 @@ import { Poll } from './Poll';
 import { P404 } from './P404';
 import { ClosedPolls } from './ClosedPolls';
 import { Profile } from './Profile';
+import { ManagerPolls } from './ManagerPolls';
 import { OverallRating } from './OverallRating';
 import { QuestionCircleOutlined, LogoutOutlined } from '@ant-design/icons';
 import logo from '../logo.png';
@@ -108,7 +109,8 @@ function StartPage({ onLogout }) {
           {user.role == "MANAGER" &&
             <Routes>
               <Route path="/" element={<Navigate to="/overallRating" replace />}></Route>
-              <Route path="/overallRating" element={<OverallRating />}></Route>
+              <Route path="/overallRating" element={<ManagerPolls />}></Route>
+              <Route path="/overallRating/:id" element={<OverallRating />}></Route>
               <Route path="*" element={<P404 />}></Route>
             </Routes>}
         </Content>
