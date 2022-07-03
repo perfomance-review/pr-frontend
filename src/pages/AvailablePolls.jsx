@@ -5,8 +5,7 @@ const AvailablePolls = () => {
   return (
     <Polls 
       title="Доступные опросы"
-      statuses={['OPEN','PROGRESS']}
-      userType={'respondent'}></Polls>
+      statuses={['OPEN','PROGRESS']} />
   );
 };
 

@@ -5,8 +5,7 @@ const ManagerPolls = () => {
   return (
     <Polls
       title="Опросы"
-      statuses={[]}
-      userType={'manager'}></Polls>
+      statuses={[]} />
   );
 };
 

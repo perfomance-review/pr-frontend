@@ -5,8 +5,7 @@ const ClosedPolls = () => {
   return (
     <Polls
       title="Пройденные и завершенные опросы"
-      statuses={['COMPLETED','CLOSED']}
-      userType={'respondent'}></Polls>
+      statuses={['COMPLETED','CLOSED']} />
   );
 };
 
