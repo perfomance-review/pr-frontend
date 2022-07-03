@@ -1,13 +1,22 @@
 import axios from 'axios';
 import { openDefaultNotification } from '../API/Notification';
 export default class PostService {
-  static async getUserPolls(statuses) {
+  static async getRespondentPolls(statuses) {
     try {
       const params = new URLSearchParams();
       statuses.forEach((status) => {
           params.append('status', status);
       })
       const response = await axios.get('/api/polls', {params})
+      return response.data.polls;
+    } catch (e) {
+      openDefaultNotification();
+      console.log(e);
+    }
+  }
+  static async getManagerPolls() {
+    try {
+      const response = await axios.get('/api/pollsmanager')
       return response.data.polls;
     } catch (e) {
       openDefaultNotification();

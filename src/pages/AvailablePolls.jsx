@@ -5,7 +5,7 @@ const AvailablePolls = () => {
   return (
     <Polls 
       title="Доступные опросы"
-      statuses={['OPEN','PROGRESS']}></Polls>
+      statuses={['OPEN','PROGRESS']} />
   );
 };
 

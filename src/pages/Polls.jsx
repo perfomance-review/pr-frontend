@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Typography, Spin, Space } from 'antd';
+import { useSelector } from 'react-redux';
+import { Card, Typography, Spin, Space, Empty } from 'antd';
 import { FieldTimeOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import PollService from '../API/PollService';
 import CommonFunctions from '../API/CommonFunctions';
@@ -11,6 +12,7 @@ const { Title } = Typography;
 const Polls = (props) => {
   const [polls, setPolls] = useState([]);
   const [isPollsLoading, setIsPollsLoading] = useState(false);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     getPolls();
@@ -18,9 +20,20 @@ const Polls = (props) => {
 
   async function getPolls() {
     setIsPollsLoading(true);
-    const response = await PollService.getUserPolls(props.statuses);
+    const response = user.role === 'RESPONDENT' 
+      ? await PollService.getRespondentPolls(props.statuses) 
+      : await PollService.getManagerPolls();
     setPolls(response);
     setIsPollsLoading(false);
+  }
+
+  function getLink(pollStatus){
+    if (pollStatus === "OPEN" || pollStatus === "PROGRESS"){
+      return `/availablePolls/`
+    } else if (user.role === 'MANAGER'){
+      return `/overallRating/`
+    } 
+    return `/profile/`
   }
 
   return (
@@ -34,32 +47,19 @@ const Polls = (props) => {
           <Title level={2} className="page-header">
             {props.title}
           </Title>
+          {polls.length === 0 && <Empty />}
           <div className="polls-wrapper">
             {polls.map((poll, index) => (
-              poll.status == "OPEN" || poll.status == "PROGRESS"
-              ? (<Link to={`/availablePolls/${poll.pollId}`} key={poll.pollId}>
+              poll.status === "CLOSED" || (["OPEN", "PROGRESS"].includes(poll.status) && user.role === 'RESPONDENT')
+              ? (<Link to={`${getLink(poll.status)}${poll.pollId}`} key={poll.pollId}>
                   <Card hoverable className="poll-card" title={poll.title}>
                     <p>{poll.description}</p>
-                    <p>
-                      Опрос займёт приблизительно{' '}
-                      {CommonFunctions.countPollTime(poll.questionsCount, poll.respondentsCount - 1)}
-                    </p>
-                    <div className="poll-card-details">
-                      <div>
-                        <QuestionCircleOutlined className="poll-card-detail-icon" />
-                        {poll.questionsCount}
-                      </div>
-                      <div>
-                        <FieldTimeOutlined className="poll-card-detail-icon" />
-                        {CommonFunctions.formatDate(poll.deadline)}
-                      </div>
-                    </div>
-                  </Card>
-                </Link>)
-              :poll.status == "CLOSED" 
-              ? (<Link to={`/profile/${poll.pollId}`} key={poll.pollId}>
-                  <Card hoverable className="poll-card" title={poll.title}>
-                    <p>{poll.description}</p>
+                    {(poll.status === "OPEN" || poll.status === "PROGRESS") &&
+                      <p>
+                        Опрос займёт приблизительно{' '}
+                        {CommonFunctions.countPollTime(poll.questionsCount, poll.respondentsCount - 1)}
+                      </p>
+                    }
                     <div className="poll-card-details">
                       <div>
                         <QuestionCircleOutlined className="poll-card-detail-icon" />
