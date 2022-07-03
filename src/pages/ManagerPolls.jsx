@@ -4,8 +4,9 @@ import { Polls } from './Polls';
 const ManagerPolls = () => {
   return (
     <Polls
-      title="Пройденные и завершенные опросы"
-      statuses={['COMPLETED','CLOSED']}></Polls>
+      title="Опросы"
+      statuses={[]}
+      userType={'manager'}></Polls>
   );
 };
 
