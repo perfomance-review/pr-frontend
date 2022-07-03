@@ -28,13 +28,12 @@ const Polls = (props) => {
   }
 
   function getLink(pollStatus){
-    if(pollStatus === "OPEN" || pollStatus === "PROGRESS"){
+    if (pollStatus === "OPEN" || pollStatus === "PROGRESS"){
       return `/availablePolls/`
     } else if (user.role === 'MANAGER'){
       return `/overallRating/`
-    } else if (user.role === 'RESPONDENT'){
-      return `/profile/`
-    }
+    } 
+    return `/profile/`
   }
 
   return (
@@ -51,8 +50,8 @@ const Polls = (props) => {
           {polls.length === 0 && <Empty />}
           <div className="polls-wrapper">
             {polls.map((poll, index) => (
-              poll.status === "CLOSED" && (user.role === 'RESPONDENT' || user.role === 'MANAGER') || (poll.status === "OPEN" || poll.status === "PROGRESS") && user.role === 'RESPONDENT'
-              ? (<Link to={getLink(poll.status) + `${poll.pollId}`} key={poll.pollId}>
+              poll.status === "CLOSED" || (["OPEN", "PROGRESS"].includes(poll.status) && user.role === 'RESPONDENT')
+              ? (<Link to={`${getLink(poll.status)}${poll.pollId}`} key={poll.pollId}>
                   <Card hoverable className="poll-card" title={poll.title}>
                     <p>{poll.description}</p>
                     {(poll.status === "OPEN" || poll.status === "PROGRESS") &&
