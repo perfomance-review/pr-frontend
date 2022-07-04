@@ -13,7 +13,8 @@ const Profile = () => {
   const user = useSelector((state) => state.user);
   const [result, setResult] = useState({ resultForQuestions: [], resultForCompetences: [] });
   const [isPollLoading, setIsPollLoading] = useState(false);
-  const pollId = useParams().id;
+  const pollId = useParams().pollId;
+  const userId = useParams().userId;
 
   useEffect(() => {
     getUserResult();
@@ -21,7 +22,9 @@ const Profile = () => {
 
   async function getUserResult() {
     setIsPollLoading(true);
-    const response = await PollService.getUserResult(pollId);
+    const response = user.role === 'RESPONDENT' 
+      ? await PollService.getUserResult(pollId)
+      : await PollService.getUserResultForManager(pollId,userId);
     setResult(response);
     setIsPollLoading(false);
   }
