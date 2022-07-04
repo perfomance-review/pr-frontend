@@ -30,7 +30,7 @@ const OverallRating = () => {
       key: 'userId',
       render: (text) => (
         <img
-          src={process.env.PUBLIC_URL + '/users/' + text + '.svg'}
+          src={`${process.env.PUBLIC_URL}/users/${text}.svg`}
           alt="user"
           className="rating-img"
         />
