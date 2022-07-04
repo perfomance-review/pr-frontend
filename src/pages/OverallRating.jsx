@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Typography, Spin, Space } from 'antd';
 import { Select, Button, Table } from 'antd';
@@ -8,41 +8,6 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 const { Option } = Select;
-const columns = [
-  {
-    title: '',
-    dataIndex: 'userId',
-    key: 'userId',
-    render: (text) => (
-      <img
-        src={process.env.PUBLIC_URL + '/users/' + text + '.svg'}
-        alt="user"
-        className="rating-img"
-      />
-    ),
-  },
-  {
-    title: 'Сотрудник',
-    dataIndex: 'user',
-    key: 'user',
-  },
-  {
-    title: 'Баллы',
-    dataIndex: 'score',
-    key: 'score',
-  },
-  {
-    title: 'Профиль',
-    key: 'profile',
-    render: () => (
-      <Link to="/profile">
-        <Button type="primary" shape="round" size="default">
-          Подробнее
-        </Button>
-      </Link>
-    ),
-  },
-];
 
 function changeUsersList(users, pollId){
   return users.map((item) => ( {
@@ -57,6 +22,46 @@ const OverallRating = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [overallRating, setOverallRating] = useState([]);
   const pollId = useParams().id;
+  const navigate = useNavigate();
+  const columns = [
+    {
+      title: '',
+      dataIndex: 'userId',
+      key: 'userId',
+      render: (text) => (
+        <img
+          src={process.env.PUBLIC_URL + '/users/' + text + '.svg'}
+          alt="user"
+          className="rating-img"
+        />
+      ),
+    },
+    {
+      title: 'Сотрудник',
+      dataIndex: 'user',
+      key: 'user',
+    },
+    {
+      title: 'Баллы',
+      dataIndex: 'score',
+      key: 'score',
+    },
+    {
+      title: 'Профиль',
+      key: 'profile',
+      render: (record) => (
+          <Button 
+            type="primary" 
+            shape="round" 
+            size="default"
+            onClick={(event) => {
+              navigate('/overallRating/' + pollId + '/' + record.userId);
+            }}>
+            Подробнее
+          </Button>
+      ),
+    },
+  ];
 
   useEffect(() => {
     getOverallRating();

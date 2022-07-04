@@ -103,7 +103,7 @@ function StartPage({ onLogout }) {
               <Route path="/availablePolls" element={<AvailablePolls />}></Route>
               <Route path="/availablePolls/:id" element={<Poll />}></Route>
               <Route path="/profile" element={<ClosedPolls />}></Route>
-              <Route path="/profile/:id" element={<Profile />}></Route>
+              <Route path="/profile/:pollId" element={<Profile />}></Route>
               <Route path="*" element={<P404 />}></Route>
             </Routes>}
           {user.role == "MANAGER" &&
@@ -111,6 +111,7 @@ function StartPage({ onLogout }) {
               <Route path="/" element={<Navigate to="/overallRating" replace />}></Route>
               <Route path="/overallRating" element={<ManagerPolls />}></Route>
               <Route path="/overallRating/:id" element={<OverallRating />}></Route>
+              <Route path="/overallRating/:pollId/:userId" element={<Profile />}></Route>
               <Route path="*" element={<P404 />}></Route>
             </Routes>}
         </Content>

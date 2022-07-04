@@ -50,6 +50,15 @@ export default class PostService {
       console.log(e);
     }
   }
+  static async getUserResultForManager(pollId,userId) {
+    try {
+      const response = await axios.get('/api/result/' + pollId + '/' + userId);
+      return response.data;
+    } catch (e) {
+      openDefaultNotification();
+      console.log(e);
+    }
+  }
   static async getQuestion(id) {
     try {
       const response = await axios.get('/api/comparepairsofpoll/' + id);
