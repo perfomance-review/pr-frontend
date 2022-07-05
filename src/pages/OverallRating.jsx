@@ -11,6 +11,7 @@ const { Option } = Select;
 
 function changeUsersList(users, pollId){
   return users.map((item) => ( {
+    key: item.userInfo.userId,
     userId: item.userInfo.userId,
     user: item.userInfo.firstName + ' ' + item.userInfo.secondName,
     score: item.score,

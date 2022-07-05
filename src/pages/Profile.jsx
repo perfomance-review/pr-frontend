@@ -5,6 +5,7 @@ import { Select, Typography, Spin, Space } from 'antd';
 import { Diagram } from './Diagram';
 import { useSelector } from 'react-redux';
 import PollService from '../API/PollService';
+import UserService from '../API/UserService';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -12,13 +13,24 @@ const { Option } = Select;
 const Profile = () => {
   const user = useSelector((state) => state.user);
   const [result, setResult] = useState({ resultForQuestions: [], resultForCompetences: [] });
+  const [viewedUser, setViewedUser] = useState({ userId: '', firstName:'', secondName: '' });
   const [isPollLoading, setIsPollLoading] = useState(false);
   const pollId = useParams().pollId;
   const userId = useParams().userId;
 
   useEffect(() => {
+    getViewedUser();
     getUserResult();
   }, []);
+
+  async function getViewedUser() {
+    setIsPollLoading(true);
+    const response = user.role === 'RESPONDENT' 
+      ? user
+      : await UserService.getViewedUser(userId);
+    setViewedUser(response);
+    setIsPollLoading(false);
+  }
 
   async function getUserResult() {
     setIsPollLoading(true);
@@ -44,12 +56,12 @@ const Profile = () => {
             <div className="profile-block">
               <div className="info-wrapper">
                 <img
-                  src={process.env.PUBLIC_URL + '/users/' + user.userId + '.svg'}
+                  src={process.env.PUBLIC_URL + '/users/' + viewedUser.userId + '.svg'}
                   alt="user"
                   className="info-img"
                 />
                 <Title level={4} className="page-header">
-                  {user.firstName} {user.secondName}
+                  {viewedUser.firstName} {viewedUser.secondName}
                 </Title>
               </div>
 
