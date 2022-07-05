@@ -19,25 +19,20 @@ const Profile = () => {
   const userId = useParams().userId;
 
   useEffect(() => {
-    getViewedUser();
     getUserResult();
   }, []);
 
-  async function getViewedUser() {
-    setIsPollLoading(true);
-    const response = user.role === 'RESPONDENT' 
-      ? user
-      : await UserService.getViewedUser(userId);
-    setViewedUser(response);
-    setIsPollLoading(false);
-  }
-
   async function getUserResult() {
     setIsPollLoading(true);
-    const response = user.role === 'RESPONDENT' 
+    const responseResult = user.role === 'RESPONDENT' 
       ? await PollService.getUserResult(pollId)
       : await PollService.getUserResultForManager(pollId,userId);
-    setResult(response);
+    setResult(responseResult);
+
+    const responseUser = user.role === 'RESPONDENT' 
+      ? user
+      : await UserService.getViewedUser(userId);
+    setViewedUser(responseUser);
     setIsPollLoading(false);
   }
   return (
