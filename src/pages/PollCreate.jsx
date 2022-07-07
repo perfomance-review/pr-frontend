@@ -115,9 +115,23 @@ const PollCreate = () => {
             </Form.Item>
 
             <Form.Item 
-              label="Респонденты">
+              label="Респонденты"
+              name="respondents"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}>
+              <Select
+                mode="multiple"
+                size="large"
+                options={users}
+                value={selectedUsers}
+                onChange={handleChange}
+                className="user-picker"
+              />
             </Form.Item>
-            <Select
+              <Select
                 mode="multiple"
                 size="large"
                 options={users}
