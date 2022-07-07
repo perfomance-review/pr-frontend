@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { AvailablePolls } from './AvailablePolls';
 import { Poll } from './Poll';
+import { PollCreate } from './PollCreate';
 import { P404 } from './P404';
 import { ClosedPolls } from './ClosedPolls';
 import { Profile } from './Profile';
@@ -31,6 +32,10 @@ const managerMenuItems = [
   {
     key: 'overallRating',
     label: (<Link to="/overallRating">Рейтинг</Link>)
+  },
+  {
+    key: 'pollCreate',
+    label: (<Link to="/pollCreate">Создать опрос</Link>)
   },
 ];
 
@@ -112,6 +117,7 @@ function StartPage({ onLogout }) {
               <Route path="/overallRating" element={<ManagerPolls />}></Route>
               <Route path="/overallRating/:id" element={<OverallRating />}></Route>
               <Route path="/overallRating/:pollId/:userId" element={<Profile />}></Route>
+              <Route path="/pollCreate" element={<PollCreate />}></Route>
               <Route path="*" element={<P404 />}></Route>
             </Routes>}
         </Content>
