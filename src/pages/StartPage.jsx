@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeUserAction } from '../reducers/user';
 const { Content, Sider } = Layout;
 
+const defaultSelectedKeys = [document.location.pathname.replace('/', '')]
 const respondentMenuItems = [
   {
       key: 'availablePolls',
@@ -50,6 +51,7 @@ const managerMenuItems = [
               </a>)
   },
 ];
+
 
 function getRoleTitle(role) {
   if (role == 'ADMINISTRATOR') {
@@ -90,7 +92,7 @@ function StartPage({ onLogout }) {
         <Menu items={user.role == "RESPONDENT" ? respondentMenuItems : managerMenuItems} 
               theme="dark" 
               mode="inline"
-              defaultSelectedKeys={['polls']} />
+              defaultSelectedKeys={defaultSelectedKeys} />
         <div className="current-user">
           <img
             src={process.env.PUBLIC_URL + '/users/' + user.userId + '.svg'}
