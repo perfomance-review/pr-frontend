@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { AvailablePolls } from './AvailablePolls';
 import { Poll } from './Poll';
+import { PollCreate } from './PollCreate';
 import { P404 } from './P404';
 import { ClosedPolls } from './ClosedPolls';
 import { Profile } from './Profile';
@@ -16,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeUserAction } from '../reducers/user';
 const { Content, Sider } = Layout;
 
+const defaultSelectedKeys = [document.location.pathname.replace('/', '')]
 const respondentMenuItems = [
   {
       key: 'availablePolls',
@@ -25,6 +27,12 @@ const respondentMenuItems = [
       key: 'profile',
       label: (<Link to="/profile/">Рейтинг</Link>)
   },
+  {
+      key: 'FAQ',
+      label: (<a href="https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q" target="_blank" rel="noopener noreferrer">
+                FAQ
+              </a>)
+  },
 ];
 
 const managerMenuItems = [
@@ -32,7 +40,18 @@ const managerMenuItems = [
     key: 'overallRating',
     label: (<Link to="/overallRating">Рейтинг</Link>)
   },
+  {
+    key: 'pollCreate',
+    label: (<Link to="/pollCreate">Создать опрос</Link>)
+  },
+  {
+      key: 'FAQ',
+      label: (<a href="https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q" target="_blank" rel="noopener noreferrer">
+                FAQ
+              </a>)
+  },
 ];
+
 
 function getRoleTitle(role) {
   if (role == 'ADMINISTRATOR') {
@@ -73,14 +92,7 @@ function StartPage({ onLogout }) {
         <Menu items={user.role == "RESPONDENT" ? respondentMenuItems : managerMenuItems} 
               theme="dark" 
               mode="inline"
-              defaultSelectedKeys={['polls']} />
-        <a
-          className="presentation-icon"
-          href="https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q"
-          target="_blank"
-        >
-          <QuestionCircleOutlined />
-        </a>
+              defaultSelectedKeys={defaultSelectedKeys} />
         <div className="current-user">
           <img
             src={process.env.PUBLIC_URL + '/users/' + user.userId + '.svg'}
@@ -112,6 +124,7 @@ function StartPage({ onLogout }) {
               <Route path="/overallRating" element={<ManagerPolls />}></Route>
               <Route path="/overallRating/:id" element={<OverallRating />}></Route>
               <Route path="/overallRating/:pollId/:userId" element={<Profile />}></Route>
+              <Route path="/pollCreate" element={<PollCreate />}></Route>
               <Route path="*" element={<P404 />}></Route>
             </Routes>}
         </Content>

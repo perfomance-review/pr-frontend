@@ -77,6 +77,16 @@ export default class PostService {
       console.log(e);
     }
   }
+  static async createPoll(poll) {
+    try {
+      const response = await axios.post('/api/polls/', poll);
+      return response.data;
+    } catch (e) {
+      openDefaultNotification();
+      console.log(e);
+      throw e;
+    }
+  }
   static async updateWinner(object) {
     try {
       const response = await axios.post('/api/updatewinner/', object);

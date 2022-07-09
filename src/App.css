@@ -97,15 +97,13 @@
   margin-right: 5px;
 }
 
-.presentation-icon {
-  position: absolute;
-  left: 15px;
-  font-size: 40px;
-  color: white;
-}
-
 .start-button {
   margin-top: 20px;
+  padding: 0 30px;
+}
+
+.create-button {
+  margin-bottom: 20px;
   padding: 0 30px;
 }
 
