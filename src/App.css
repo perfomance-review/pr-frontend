@@ -109,6 +109,11 @@
   padding: 0 30px;
 }
 
+.create-button {
+  margin-bottom: 20px;
+  padding: 0 30px;
+}
+
 .main-page-wrap {
   display: flex;
 }
