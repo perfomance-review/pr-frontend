@@ -26,6 +26,12 @@ const respondentMenuItems = [
       key: 'profile',
       label: (<Link to="/profile/">Рейтинг</Link>)
   },
+  {
+      key: 'FAQ',
+      label: (<a href="https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q" target="_blank" rel="noopener noreferrer">
+                FAQ
+              </a>)
+  },
 ];
 
 const managerMenuItems = [
@@ -36,6 +42,12 @@ const managerMenuItems = [
   {
     key: 'pollCreate',
     label: (<Link to="/pollCreate">Создать опрос</Link>)
+  },
+  {
+      key: 'FAQ',
+      label: (<a href="https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q" target="_blank" rel="noopener noreferrer">
+                FAQ
+              </a>)
   },
 ];
 
@@ -79,13 +91,6 @@ function StartPage({ onLogout }) {
               theme="dark" 
               mode="inline"
               defaultSelectedKeys={['polls']} />
-        <a
-          className="presentation-icon"
-          href="https://disk.yandex.ru/i/yDvWH9sEr7Lj3Q"
-          target="_blank"
-        >
-          <QuestionCircleOutlined />
-        </a>
         <div className="current-user">
           <img
             src={process.env.PUBLIC_URL + '/users/' + user.userId + '.svg'}
