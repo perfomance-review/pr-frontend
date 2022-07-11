@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Card, Typography, Spin, Space, Empty } from 'antd';
+import { Card, Typography, Spin, Space, Empty, Button } from 'antd';
 import { FieldTimeOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import PollService from '../API/PollService';
 import CommonFunctions from '../API/CommonFunctions';
@@ -44,13 +44,22 @@ const Polls = (props) => {
         </Space>
       ) : (
         <>
+          <div style={{display: 'flex', direction: 'rtl'}}>
+            {user.role === 'MANAGER' &&
+              <Button 
+                type="primary" 
+                size="small" 
+                href="/api/reports/created_polls" 
+                download
+                shape="round">
+                Отчет по опросам
+              </Button>
+            }
+          </div>
           <Title level={2} className="page-header">
             {props.title}
           </Title>
           {polls.length === 0 && <Empty />}
-          {user.role === 'MANAGER' &&
-            <a href="/reports/created_polls" download>Отчет по опросам</a>
-          }
           <div className="polls-wrapper">
             {polls.map((poll, index) => (
               poll.status === "CLOSED" || (["OPEN", "PROGRESS"].includes(poll.status) && user.role === 'RESPONDENT')

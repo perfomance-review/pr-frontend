@@ -79,10 +79,19 @@ const OverallRating = () => {
     <div>
       {!isLoading ? (
         <>
+          <div style={{display: 'flex', direction: 'rtl'}}>
+            <Button 
+              type="primary" 
+              size="small" 
+              href={"/api/reports/" + pollId + "/poll_result"}
+              download
+              shape="round">
+              Результаты опроса
+            </Button>
+          </div>
           <Title level={2} className="page-header">
             Рейтинг, на основании оценок сотрудников
           </Title>
-          <a href={"/reports/" + pollId + "/poll_result"} download>Результаты опроса</a>
           
           {overallRating.length > 0 &&
             overallRating.map((question, index) => (
