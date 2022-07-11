@@ -97,9 +97,15 @@ const OverallRating = () => {
             overallRating.map((question, index) => (
               <div key={index}>
                 <div className="question-page-wrapper">
-                  <Title level={5} className="question">
-                    { question.textCompetence } ({ question.textQuestion })
-                  </Title>
+                  {question.textCompetence
+                    ?<Title level={5} className="question">
+                      { question.textCompetence } ({ question.textQuestion })
+                    </Title>
+                    :<Title level={5} className="question">
+                      { question.textQuestion }
+                    </Title>
+                  }
+                  
                 </div>
                 
                 <div className="rating-table-wrapper">

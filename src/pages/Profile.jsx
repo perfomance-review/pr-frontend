@@ -72,7 +72,12 @@ const Profile = () => {
                 <div key={index}>
                   <div className="info-wrapper">
                     {question.textQuestion}
-                    <br/>({question.textCompetence})
+                    {
+                      question.textCompetence
+                      ?<><br/>({question.textCompetence})</>
+                      :<></>
+                    }
+                    
                   </div>
                   <input
                     type="range"
