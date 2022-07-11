@@ -82,7 +82,8 @@ const OverallRating = () => {
           <Title level={2} className="page-header">
             Рейтинг, на основании оценок сотрудников
           </Title>
-
+          <a href={"/reports/" + pollId + "/poll_result"} download>Результаты опроса</a>
+          
           {overallRating.length > 0 &&
             overallRating.map((question, index) => (
               <div key={index}>

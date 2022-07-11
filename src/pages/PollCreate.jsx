@@ -76,6 +76,7 @@ const PollCreate = () => {
       return;
     }
     openNotification('Опрос успешно создан');
+    window.location.reload(false);
     setCreating(false);
   }
 

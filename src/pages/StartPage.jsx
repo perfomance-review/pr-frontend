@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeUserAction } from '../reducers/user';
 const { Content, Sider } = Layout;
 
-const defaultSelectedKeys = [document.location.pathname.replace('/', '')]
+const defaultSelectedKeys = [document.location.pathname.replace('/', '') != '' ? document.location.pathname.replace('/', '') : ('availablePolls','overallRating')]
 const respondentMenuItems = [
   {
       key: 'availablePolls',

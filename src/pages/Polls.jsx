@@ -48,6 +48,9 @@ const Polls = (props) => {
             {props.title}
           </Title>
           {polls.length === 0 && <Empty />}
+          {user.role === 'MANAGER' &&
+            <a href="/reports/created_polls" download>Отчет по опросам</a>
+          }
           <div className="polls-wrapper">
             {polls.map((poll, index) => (
               poll.status === "CLOSED" || (["OPEN", "PROGRESS"].includes(poll.status) && user.role === 'RESPONDENT')
